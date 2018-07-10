@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.vraiment.gradle:jni:0.2.2"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "com.vraiment.gradle.jni"
+
+group 'com.blissapplications.ble'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+generateJni {
+    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home')
+    classpath = files("$buildDir/classes/java/main")
+    generatedHeadersDir = file("src/main/jni/src")
+    classes = [
+            'com.blissapplications.ble.BluetoothCentralManager',
+            'com.blissapplications.ble.BluetoothPeripheral'
+    ]
+}
+
+makeJni {
+    generatedHeadersDir = file("src/main/jni/src")
+    makeFileDir = file("src/main/jni")
+    makeOutputDir = file("$buildDir/jni")
+    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home')
+    environment("JAVA_HOME", jdk)
+}
+
+test {
+    systemProperty("java.library.path", file("./libs"))
+    jvmArgs '-Xcheck:jni'
+    testLogging {
+        outputs.upToDateWhen {false}
+        showStandardStreams = true
+    }
+
+}

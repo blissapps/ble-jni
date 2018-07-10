@@ -1,0 +1,349 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E265674520F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */; };
+		E265674620F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */; };
+		E2793D0720F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */; };
+		E2793D0820F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */; };
+		E2793D0A20F3EE9600A8D890 /* libble-jni.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E265673620F3E43E0084FC25 /* libble-jni.dylib */; };
+		E2793D0D20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = E2793D0C20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h */; };
+		E2793D0F20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2793D0920F3EE8900A8D890 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ../../../../../libs;
+			dstSubfolderSpec = 16;
+			files = (
+				E2793D0A20F3EE9600A8D890 /* libble-jni.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E265673620F3E43E0084FC25 /* libble-jni.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libble-jni.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothCentralManager.h; sourceTree = "<group>"; };
+		E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothCentralManager.mm; sourceTree = "<group>"; };
+		E2793D0320F3E69400A8D890 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBCentralManagerDelegateImpl.h; sourceTree = "<group>"; };
+		E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CBCentralManagerDelegateImpl.mm; sourceTree = "<group>"; };
+		E2793D0C20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothPeripheral.h; sourceTree = "<group>"; };
+		E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothPeripheral.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E265673320F3E43E0084FC25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E265672B20F3E3FA0084FC25 = {
+			isa = PBXGroup;
+			children = (
+				E2793D0320F3E69400A8D890 /* Makefile */,
+				E265674220F3E48E0084FC25 /* src */,
+				E265673720F3E43E0084FC25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E265673720F3E43E0084FC25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E265673620F3E43E0084FC25 /* libble-jni.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E265674220F3E48E0084FC25 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E2793D0C20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h */,
+				E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */,
+				E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */,
+				E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */,
+				E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */,
+				E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E265673420F3E43E0084FC25 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2793D0720F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h in Headers */,
+				E265674520F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h in Headers */,
+				E2793D0D20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E265673520F3E43E0084FC25 /* ble-jni */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E265673F20F3E43E0084FC25 /* Build configuration list for PBXNativeTarget "ble-jni" */;
+			buildPhases = (
+				E265673220F3E43E0084FC25 /* Sources */,
+				E265673320F3E43E0084FC25 /* Frameworks */,
+				E265673420F3E43E0084FC25 /* Headers */,
+				E2793D0920F3EE8900A8D890 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ble-jni";
+			productName = "ble-jni";
+			productReference = E265673620F3E43E0084FC25 /* libble-jni.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E265672C20F3E3FA0084FC25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					E265673520F3E43E0084FC25 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = E265672F20F3E3FA0084FC25 /* Build configuration list for PBXProject "ble-jni" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E265672B20F3E3FA0084FC25;
+			productRefGroup = E265673720F3E43E0084FC25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E265673520F3E43E0084FC25 /* ble-jni */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E265673220F3E43E0084FC25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2793D0F20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm in Sources */,
+				E2793D0820F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm in Sources */,
+				E265674620F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E265673020F3E3FA0084FC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		E265673120F3E3FA0084FC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		E265674020F3E43E0084FC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				JAVA_HOME = /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lobjc",
+					"-dynamiclib",
+					"-framework",
+					CoreBluetooth,
+					"-framework",
+					CoreFoundation,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.10;
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					"${JAVA_HOME}/include/",
+					"${JAVA_HOME}/include/darwin",
+				);
+			};
+			name = Debug;
+		};
+		E265674120F3E43E0084FC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				JAVA_HOME = /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lobjc",
+					"-dynamiclib",
+					"-framework",
+					CoreBluetooth,
+					"-framework",
+					CoreFoundation,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.10;
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					"${JAVA_HOME}/include/",
+					"${JAVA_HOME}/include/darwin",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E265672F20F3E3FA0084FC25 /* Build configuration list for PBXProject "ble-jni" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E265673020F3E3FA0084FC25 /* Debug */,
+				E265673120F3E3FA0084FC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E265673F20F3E43E0084FC25 /* Build configuration list for PBXNativeTarget "ble-jni" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E265674020F3E43E0084FC25 /* Debug */,
+				E265674120F3E43E0084FC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E265672C20F3E3FA0084FC25 /* Project object */;
+}
