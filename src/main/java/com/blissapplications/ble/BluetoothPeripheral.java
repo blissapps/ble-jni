@@ -12,7 +12,7 @@ public class BluetoothPeripheral
 {
 	private long nativeCentralManagerHandle;
 	
-	private native String getIdentifier(long nativeCentralManagerHandle);
+	private native UUID getIdentifier(long nativeCentralManagerHandle);
 	
 	public BluetoothPeripheral(long nativeCentralManagerHandle)
 	{
@@ -21,7 +21,7 @@ public class BluetoothPeripheral
 	
 	public UUID getIdentifier()
 	{
-		return UUID.fromString(getIdentifier(nativeCentralManagerHandle));
+		return getIdentifier(nativeCentralManagerHandle);
 	}
 	
 	static

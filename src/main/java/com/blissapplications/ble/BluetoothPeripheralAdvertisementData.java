@@ -15,11 +15,11 @@ import java.util.UUID;
 public class BluetoothPeripheralAdvertisementData
 {
 	public String localName;
-	byte[] manufacturerData;
-	BluetoothServiceData[] serviceData;
-	UUID[] serviceUUIDs;
-	UUID[] overflowServiceUUIDs;
-	double txPowerLevel;
-	boolean isConnectable;
-	UUID[] solicitedServiceUUIDs;
+	public byte[] manufacturerData;
+	public BluetoothServiceData[] serviceData;
+	public UUID[] serviceUUIDs;
+	public UUID[] overflowServiceUUIDs;
+	public double txPowerLevel;
+	public boolean isConnectable;
+	public UUID[] solicitedServiceUUIDs;
 }

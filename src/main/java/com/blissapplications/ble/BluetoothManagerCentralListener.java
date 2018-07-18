@@ -9,4 +9,6 @@ package com.blissapplications.ble;
 public interface BluetoothManagerCentralListener
 {
 	void discoveredPeripheral(BluetoothPeripheral peripheral, double rssi, BluetoothPeripheralAdvertisementData advertisementData);
+	
+	void updatedState();
 }

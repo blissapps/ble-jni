@@ -57,6 +57,15 @@ public class BluetoothCentralManager
 		listener.discoveredPeripheral(peripheral, rssi, advertisementData);
 	}
 	
+	public void updatedState(){
+		if (listener == null)
+		{
+			return;
+		}
+		
+		listener.updatedState();
+	}
+	
 	public void setListener(BluetoothManagerCentralListener listener)
 	{
 		this.listener = listener;

@@ -36,13 +36,21 @@ public class BluetoothCentralManagerTest
 			@Override
 			public void discoveredPeripheral(BluetoothPeripheral peripheral, double rssi, BluetoothPeripheralAdvertisementData advertisementData)
 			{
-				System.out.printf("Got Peripheral: %s (%f dB)\n", peripheral.getIdentifier(), rssi);
+				System.out.printf("Got Peripheral: %s (%f dB) <%s>\n", peripheral.getIdentifier(), rssi, advertisementData.localName);
+				System.out.printf("Manufacturer Data: [%s]\n", Base16.getUpperEncoder().encode(advertisementData.manufacturerData));
+				System.out.printf("Service Data: [%d]\n", advertisementData.serviceData.length);
+				if("Env".equals(advertisementData.localName)){
+					for (BluetoothServiceData serviceData: advertisementData.serviceData)
+					{
+						System.out.printf("Service [%s]: [%s]\n", serviceData.serviceUUID, Base16.getUpperEncoder().encode(advertisementData.manufacturerData));
+					}
+				}
 			}
 		});
 		BluetoothCentralManagerState state = manager.getState();
 		manager.startScanPeripherals();
 		
-		Thread.sleep(10000);
+		Thread.sleep(40000);
 		
 		manager.stopScanPeripherals();
 		

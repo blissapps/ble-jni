@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E25CBEDF20F6C32B00F9CB52 /* BJObjectBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = E25CBEDE20F6C32B00F9CB52 /* BJObjectBuilder.mm */; };
+		E25CBEE320F6F4C600F9CB52 /* BJJNIUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E25CBEE120F6F4C600F9CB52 /* BJJNIUtils.h */; };
+		E25CBEE420F6F4C600F9CB52 /* BJJNIUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E25CBEE220F6F4C600F9CB52 /* BJJNIUtils.mm */; };
+		E25CBEE720F6F62300F9CB52 /* BJCentralManagerInvoker.h in Headers */ = {isa = PBXBuildFile; fileRef = E25CBEE520F6F62300F9CB52 /* BJCentralManagerInvoker.h */; };
+		E25CBEE820F6F62300F9CB52 /* BJCentralManagerInvoker.mm in Sources */ = {isa = PBXBuildFile; fileRef = E25CBEE620F6F62300F9CB52 /* BJCentralManagerInvoker.mm */; };
 		E265674520F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */; };
 		E265674620F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */; };
-		E2793D0720F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */; };
-		E2793D0820F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */; };
+		E2793D0720F3EC6800A8D890 /* BJCentralManagerDelegateImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = E2793D0520F3EC6800A8D890 /* BJCentralManagerDelegateImpl.h */; };
+		E2793D0820F3EC6800A8D890 /* BJCentralManagerDelegateImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2793D0620F3EC6800A8D890 /* BJCentralManagerDelegateImpl.mm */; };
 		E2793D0A20F3EE9600A8D890 /* libble-jni.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E265673620F3E43E0084FC25 /* libble-jni.dylib */; };
 		E2793D0D20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = E2793D0C20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h */; };
 		E2793D0F20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */; };
@@ -30,12 +35,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E25CBEDE20F6C32B00F9CB52 /* BJObjectBuilder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BJObjectBuilder.mm; sourceTree = "<group>"; };
+		E25CBEE020F6C34300F9CB52 /* BJObjectBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BJObjectBuilder.h; sourceTree = "<group>"; };
+		E25CBEE120F6F4C600F9CB52 /* BJJNIUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BJJNIUtils.h; sourceTree = "<group>"; };
+		E25CBEE220F6F4C600F9CB52 /* BJJNIUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BJJNIUtils.mm; sourceTree = "<group>"; };
+		E25CBEE520F6F62300F9CB52 /* BJCentralManagerInvoker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BJCentralManagerInvoker.h; sourceTree = "<group>"; };
+		E25CBEE620F6F62300F9CB52 /* BJCentralManagerInvoker.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BJCentralManagerInvoker.mm; sourceTree = "<group>"; };
+		E25CBEE920F6FE8200F9CB52 /* BJJavaClasses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BJJavaClasses.h; sourceTree = "<group>"; };
 		E265673620F3E43E0084FC25 /* libble-jni.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libble-jni.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothCentralManager.h; sourceTree = "<group>"; };
 		E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothCentralManager.mm; sourceTree = "<group>"; };
 		E2793D0320F3E69400A8D890 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBCentralManagerDelegateImpl.h; sourceTree = "<group>"; };
-		E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CBCentralManagerDelegateImpl.mm; sourceTree = "<group>"; };
+		E2793D0520F3EC6800A8D890 /* BJCentralManagerDelegateImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BJCentralManagerDelegateImpl.h; sourceTree = "<group>"; };
+		E2793D0620F3EC6800A8D890 /* BJCentralManagerDelegateImpl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BJCentralManagerDelegateImpl.mm; sourceTree = "<group>"; };
 		E2793D0C20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothPeripheral.h; sourceTree = "<group>"; };
 		E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothPeripheral.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,8 +87,15 @@
 				E2793D0E20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm */,
 				E265674320F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h */,
 				E265674420F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm */,
-				E2793D0520F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h */,
-				E2793D0620F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm */,
+				E2793D0520F3EC6800A8D890 /* BJCentralManagerDelegateImpl.h */,
+				E2793D0620F3EC6800A8D890 /* BJCentralManagerDelegateImpl.mm */,
+				E25CBEE520F6F62300F9CB52 /* BJCentralManagerInvoker.h */,
+				E25CBEE620F6F62300F9CB52 /* BJCentralManagerInvoker.mm */,
+				E25CBEE020F6C34300F9CB52 /* BJObjectBuilder.h */,
+				E25CBEDE20F6C32B00F9CB52 /* BJObjectBuilder.mm */,
+				E25CBEE120F6F4C600F9CB52 /* BJJNIUtils.h */,
+				E25CBEE220F6F4C600F9CB52 /* BJJNIUtils.mm */,
+				E25CBEE920F6FE8200F9CB52 /* BJJavaClasses.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -88,9 +107,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2793D0720F3EC6800A8D890 /* CBCentralManagerDelegateImpl.h in Headers */,
+				E25CBEE320F6F4C600F9CB52 /* BJJNIUtils.h in Headers */,
+				E2793D0720F3EC6800A8D890 /* BJCentralManagerDelegateImpl.h in Headers */,
 				E265674520F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.h in Headers */,
 				E2793D0D20F4419F00A8D890 /* com_blissapplications_ble_BluetoothPeripheral.h in Headers */,
+				E25CBEE720F6F62300F9CB52 /* BJCentralManagerInvoker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2793D0F20F4422200A8D890 /* com_blissapplications_ble_BluetoothPeripheral.mm in Sources */,
-				E2793D0820F3EC6800A8D890 /* CBCentralManagerDelegateImpl.mm in Sources */,
+				E2793D0820F3EC6800A8D890 /* BJCentralManagerDelegateImpl.mm in Sources */,
+				E25CBEDF20F6C32B00F9CB52 /* BJObjectBuilder.mm in Sources */,
 				E265674620F3E48E0084FC25 /* com_blissapplications_ble_BluetoothCentralManager.mm in Sources */,
+				E25CBEE820F6F62300F9CB52 /* BJCentralManagerInvoker.mm in Sources */,
+				E25CBEE420F6F4C600F9CB52 /* BJJNIUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

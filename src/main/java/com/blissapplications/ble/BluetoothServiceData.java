@@ -1,5 +1,6 @@
 package com.blissapplications.ble;
 
+
 import java.util.UUID;
 
 /**
@@ -10,7 +11,7 @@ import java.util.UUID;
  */
 public class BluetoothServiceData
 {
-	UUID serviceUUID;
-	byte[] data;
+	public UUID serviceUUID;
+	public byte[] data;
 	
 }

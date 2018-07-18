@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    getIdentifier
- * Signature: (J)Ljava/lang/String;
+ * Signature: (J)Ljava/util/UUID;
  */
-JNIEXPORT jstring JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getIdentifier
+JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getIdentifier
   (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
