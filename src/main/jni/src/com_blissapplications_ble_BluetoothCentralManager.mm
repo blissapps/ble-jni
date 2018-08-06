@@ -14,11 +14,9 @@ JNIEXPORT jlong JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_i
 (JNIEnv* env, jobject javaCentralManager){
     @autoreleasepool{
         JavaVM* jvm = [BJJNIUtils javaVM:env];
-
         jobject javaCentralManagerGlobalRef = env->NewGlobalRef(javaCentralManager);
-
         CBCentralManagerDelegateImpl *delegateImpl = [[CBCentralManagerDelegateImpl alloc] initWithJavaCentralManager:javaCentralManagerGlobalRef andJavaVM:jvm];
-        dispatch_queue_t queue = dispatch_queue_create("ble",NULL);
+        dispatch_queue_t queue = dispatch_queue_create("BLE-JNI", DISPATCH_QUEUE_SERIAL);
         CBCentralManager *centralManager = [[CBCentralManager alloc] initWithDelegate:delegateImpl queue:queue];
         return (jlong) centralManager;
     }

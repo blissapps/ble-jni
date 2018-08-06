@@ -29,7 +29,6 @@ public class BluetoothCharacteristic
 		this.service = service;
 	}
 	
-	
 	public UUID getIdentifier()
 	{
 		return getIdentifier(nativeCharacteristicHandle);

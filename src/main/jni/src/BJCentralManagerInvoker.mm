@@ -8,8 +8,6 @@
 #import "BJCentralManagerInvoker.h"
 #import "BJJavaClasses.h"
 
-using namespace std;
-
 @implementation BJCentralManagerInvoker
 
 + (void) invokeCentralManager:(jobject)javaCentralManager

@@ -76,8 +76,9 @@
 "L" BJBluetoothException_ClassName ";" \
 ")V"
 
-#define BJBluetoothPeripheral_DiscoveredCharacteristicsForService_MethodName "discoveredServices"
+#define BJBluetoothPeripheral_DiscoveredCharacteristicsForService_MethodName "discoveredCharacteristicsForService"
 #define BJBluetoothPeripheral_DiscoveredCharacteristicsForService_Signature "(" \
+"L" BJBluetoothService_ClassName ";" \
 "L" BJBluetoothException_ClassName ";" \
 ")V"
 

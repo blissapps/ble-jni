@@ -28,7 +28,7 @@ public class BluetoothPeripheral
 	
 	private native void discoverCharacteristicsForService(long nativePeripheralHandle, UUID[] characteristicUUIDs, long nativeServiceHandle);
 	
-	private native void discoverDescriptors(long nativePeripheralHandle, BluetoothCharacteristic characteristic);
+	private native void discoverDescriptorsForCharacteristic(long nativePeripheralHandle, BluetoothCharacteristic characteristic);
 	
 	private native void readValueForCharacteristic(long nativePeripheralHandle, BluetoothCharacteristic characteristic);
 	
@@ -112,9 +112,9 @@ public class BluetoothPeripheral
 		listener.discoveredCharacteristicsForService(this, service, error);
 	}
 	
-	public void discoverDescriptors(BluetoothCharacteristic characteristic)
+	public void discoverDescriptorsForCharacteristic(BluetoothCharacteristic characteristic)
 	{
-		discoverDescriptors(nativePeripheralHandle, characteristic);
+        discoverDescriptorsForCharacteristic(nativePeripheralHandle, characteristic);
 	}
 	
 	public void readValueForCharacteristic(BluetoothCharacteristic characteristic)

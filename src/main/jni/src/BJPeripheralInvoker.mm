@@ -28,7 +28,7 @@ discoveredCharacteristicsForService:(jobject)javaService
     jmethodID mid = env->GetMethodID(peripheralCls,
                                      BJBluetoothPeripheral_DiscoveredCharacteristicsForService_MethodName,
                                      BJBluetoothPeripheral_DiscoveredCharacteristicsForService_Signature);
-    env->CallVoidMethod(javaPeripheral, mid, javaBluetoothException);
+    env->CallVoidMethod(javaPeripheral, mid, javaService, javaBluetoothException);
 }
 
 @end

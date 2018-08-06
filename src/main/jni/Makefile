@@ -1,5 +1,5 @@
 all:
-	xcodebuild
+	xcodebuild -project ble-jni-xcode6.xcodeproj
 
 clean:
 	xcodebuild clean

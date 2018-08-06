@@ -25,7 +25,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 generateJni {
-    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home')
+    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/')
     classpath = files("$buildDir/classes/java/main")
     generatedHeadersDir = file("src/main/jni/src")
     classes = [
@@ -40,7 +40,8 @@ makeJni {
     generatedHeadersDir = file("src/main/jni/src")
     makeFileDir = file("src/main/jni")
     makeOutputDir = file("$buildDir/jni")
-    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home')
+    jdk = file('/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/')
+
     environment("JAVA_HOME", jdk)
 }
 

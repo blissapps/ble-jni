@@ -283,14 +283,20 @@
 }
 
 + (jobject) buildServiceFrom:(CBService*)service env:(JNIEnv*)env{
-    jclass cls = env->FindClass(BJBluetoothService_ClassName);
-    jmethodID constructor = env->GetMethodID(cls,
-                                             BJ_Constructor_MethodName,
-                                             BJBluetoothService_Constructor_Signature);
-    jobject wrappedPeripheral = service.peripheral.javaPeripheral;
-    jobject wrappedService = env->NewObject(cls, constructor, (jlong) service, (jlong) wrappedPeripheral);
-
-    return wrappedService;
+    jobject serviceJava = service.javaService;
+    
+    if(serviceJava == NULL){
+        jclass cls = env->FindClass(BJBluetoothService_ClassName);
+        jmethodID constructor = env->GetMethodID(cls,
+                                                 BJ_Constructor_MethodName,
+                                                 BJBluetoothService_Constructor_Signature);
+        jobject wrappedPeripheral = service.peripheral.javaPeripheral;
+        serviceJava = env->NewObject(cls, constructor, (jlong) service, (jlong) wrappedPeripheral);
+        serviceJava = env->NewWeakGlobalRef(serviceJava);
+        service.javaService = serviceJava;
+    }
+    
+    return serviceJava;
 }
 
 + (jobjectArray) buildCharacteristicObjectArrayFrom:(NSArray*)characteristics env:(JNIEnv*)env{
@@ -373,25 +379,25 @@
 
     UInt8 uuidBytes[16];
 
-    uuidBytes[0] = (UInt8) mostSignificantBits & 0xff00000000000000 >> 56;
-    uuidBytes[1] = (UInt8) mostSignificantBits & 0x00ff000000000000 >> 48;
-    uuidBytes[2] = (UInt8) mostSignificantBits & 0x0000ff0000000000 >> 40;
-    uuidBytes[3] = (UInt8) mostSignificantBits & 0x000000ff00000000 >> 32;
-    uuidBytes[4] = (UInt8) mostSignificantBits & 0x00000000ff000000 >> 24;
-    uuidBytes[5] = (UInt8) mostSignificantBits & 0x0000000000ff0000 >> 16;
-    uuidBytes[6] = (UInt8) mostSignificantBits & 0x000000000000ff00 >> 8;
-    uuidBytes[7] = (UInt8) mostSignificantBits & 0x00000000000000ff >> 0;
+    uuidBytes[0] = (UInt8) ((mostSignificantBits & 0xff00000000000000) >> 56);
+    uuidBytes[1] = (UInt8) ((mostSignificantBits & 0x00ff000000000000) >> 48);
+    uuidBytes[2] = (UInt8) ((mostSignificantBits & 0x0000ff0000000000) >> 40);
+    uuidBytes[3] = (UInt8) ((mostSignificantBits & 0x000000ff00000000) >> 32);
+    uuidBytes[4] = (UInt8) ((mostSignificantBits & 0x00000000ff000000) >> 24);
+    uuidBytes[5] = (UInt8) ((mostSignificantBits & 0x0000000000ff0000) >> 16);
+    uuidBytes[6] = (UInt8) ((mostSignificantBits & 0x000000000000ff00) >> 8);
+    uuidBytes[7] = (UInt8) ((mostSignificantBits & 0x00000000000000ff) >> 0);
 
-    uuidBytes[8]  = (UInt8) leastSignificantBits & 0xff00000000000000 >> 56;
-    uuidBytes[9]  = (UInt8) leastSignificantBits & 0x00ff000000000000 >> 48;
-    uuidBytes[10] = (UInt8) leastSignificantBits & 0x0000ff0000000000 >> 40;
-    uuidBytes[11] = (UInt8) leastSignificantBits & 0x000000ff00000000 >> 32;
-    uuidBytes[12] = (UInt8) leastSignificantBits & 0x00000000ff000000 >> 24;
-    uuidBytes[13] = (UInt8) leastSignificantBits & 0x0000000000ff0000 >> 16;
-    uuidBytes[14] = (UInt8) leastSignificantBits & 0x000000000000ff00 >> 8;
-    uuidBytes[15] = (UInt8) leastSignificantBits & 0x00000000000000ff >> 0;
+    uuidBytes[8]  = (UInt8) ((leastSignificantBits & 0xff00000000000000) >> 56);
+    uuidBytes[9]  = (UInt8) ((leastSignificantBits & 0x00ff000000000000) >> 48);
+    uuidBytes[10] = (UInt8) ((leastSignificantBits & 0x0000ff0000000000) >> 40);
+    uuidBytes[11] = (UInt8) ((leastSignificantBits & 0x000000ff00000000) >> 32);
+    uuidBytes[12] = (UInt8) ((leastSignificantBits & 0x00000000ff000000) >> 24);
+    uuidBytes[13] = (UInt8) ((leastSignificantBits & 0x0000000000ff0000) >> 16);
+    uuidBytes[14] = (UInt8) ((leastSignificantBits & 0x000000000000ff00) >> 8);
+    uuidBytes[15] = (UInt8) ((leastSignificantBits & 0x00000000000000ff) >> 0);
 
-    NSData *uuidData = [NSData dataWithBytesNoCopy:uuidBytes length:16];
+    NSData *uuidData = [NSData dataWithBytes:uuidBytes length:16];
 
     return [CBUUID UUIDWithData:uuidData];
 }

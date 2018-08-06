@@ -28,7 +28,6 @@ JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothService_g
     @autoreleasepool{
         CBService *service = (CBService*) serviceHandle;
         NSArray *characteristics = [service characteristics];
-        NSLog(@"characteristics: %@", characteristics);
         return [BJObjectBuilder buildCharacteristicObjectArrayFrom:characteristics env:env];
     }
 }
