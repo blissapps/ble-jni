@@ -30,13 +30,19 @@ using namespace std;
 }
 
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral
-{}
+{
+    NSLog(@"Updated name");
+}
 
 - (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
-{}
+{
+    NSLog(@"Modified services: %@", invalidatedServices);
+}
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
-{}
+{
+    NSLog(@"Updated RSSI: %@", error);
+}
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
@@ -55,11 +61,13 @@ using namespace std;
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
-{}
+{
+    NSLog(@"Discovered didDiscoverIncludedServicesForService...");
+}
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    NSLog(@"Discovered Characteristics...");
+    NSLog(@"Discovered Characteristics...: %@", error);
     JNIEnv* env = [BJJNIUtils attachThread:_jvm];
 
     jobject wrappedError = NULL;

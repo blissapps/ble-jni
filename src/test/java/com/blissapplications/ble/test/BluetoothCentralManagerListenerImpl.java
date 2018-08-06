@@ -3,6 +3,7 @@ package com.blissapplications.ble.test;
 import com.blissapplications.ble.*;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Bliss Applications
@@ -61,8 +62,8 @@ public class BluetoothCentralManagerListenerImpl implements BluetoothCentralMana
 		{
 			return false;
 		}
-		return (manufacturerData[0] == MODE1_MAGIC_BYTE_1 && manufacturerData[1] == MODE1_MAGIC_BYTE_2) ||
-			(manufacturerData[0] == MODE2_MAGIC_BYTE_1 && manufacturerData[1] == MODE2_MAGIC_BYTE_2);
+		return (manufacturerData[0] == MODE1_MAGIC_BYTE_1 && manufacturerData[1] == MODE1_MAGIC_BYTE_2)/* ||
+			(manufacturerData[0] == MODE2_MAGIC_BYTE_1 && manufacturerData[1] == MODE2_MAGIC_BYTE_2)*/;
 	}
 	
 	@Override
@@ -80,7 +81,10 @@ public class BluetoothCentralManagerListenerImpl implements BluetoothCentralMana
 	{
 		BluetoothPeripheralState state = peripheral.getState();
 		System.out.printf("Connected peripheral: %s - %s\n", peripheral.getIdentifier(), state);
-		peripheral.discoverServices();
+		
+		UUID c1 = UUID.fromString("0c4c3000-7700-46f4-aa96-d5e974e32a54");
+		System.out.printf("discoverServices: %s\n", c1);
+		peripheral.discoverServices(new UUID[] {});
 	}
 	
 	@Override

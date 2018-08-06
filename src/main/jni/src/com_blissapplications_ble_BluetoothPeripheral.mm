@@ -30,7 +30,9 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discov
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         NSArray* serviceUUIDs = [BJObjectBuilder buildCBUUIDArrayFromUUIDObjectArray:services env:env];
-        [peripheral discoverServices:serviceUUIDs];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [peripheral discoverServices:serviceUUIDs];
+        });
     }
 
 }
@@ -39,15 +41,26 @@ JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothPeriphera
 (JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
-        NSArray* services = [[peripheral services] retain];
+        __block NSArray* services = NULL;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            services = [peripheral services];
+        });
         return [BJObjectBuilder buildServiceObjectArrayFrom:services env:env];
     }
 }
 
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discoverCharacteristicsForService
 (JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle, jobjectArray characteristics, jlong serviceHandle) {
-    CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
-    CBService *service = (CBService*) serviceHandle;
-    NSArray* characteristicUUIDs = [BJObjectBuilder buildCBUUIDArrayFromUUIDObjectArray:characteristics env:env];
-    [peripheral discoverCharacteristics:nil forService:service];
+    @autoreleasepool{
+        NSArray* characteristicUUIDs = [BJObjectBuilder buildCBUUIDArrayFromUUIDObjectArray:characteristics env:env];
+        characteristicUUIDs = characteristicUUIDs.count == 0 ? nil : characteristicUUIDs;
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        CBService *service = (CBService*) serviceHandle;
+        NSLog(@"I Peripheral: %@", peripheral);
+        NSLog(@"S Peripheral: %@", service.peripheral);
+        NSLog(@"Service: %@", service);
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [peripheral discoverCharacteristics:characteristicUUIDs forService:peripheral.services[0]];
+        });
+    }
 }

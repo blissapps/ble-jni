@@ -37,7 +37,7 @@ public class BluetoothCentralManagerTest
 			manager.startScanPeripherals();
 		}
 		
-		Thread.sleep(120000);
+		Thread.sleep(240000);
 		
 		manager.stopScanPeripherals();
 		

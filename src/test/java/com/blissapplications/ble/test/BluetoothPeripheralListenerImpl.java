@@ -20,13 +20,12 @@ public class BluetoothPeripheralListenerImpl implements BluetoothPeripheralListe
 	public void discoveredServices(BluetoothPeripheral peripheral, BluetoothException error)
 	{
 		BluetoothService[] services = peripheral.getServices();
-		
+		//UUID c1 = UUID.fromString("0c4c3001-7700-46f4-aa96-d5e974e32a54");
+		System.out.printf("Discovered services. Peripheral state: %s \n", peripheral.getState());
 		for (BluetoothService service : services)
 		{
 			System.out.printf("Discovered service %s on peripheral %s \n", service.getIdentifier(), peripheral.getIdentifier());
-			
 			peripheral.discoverCharacteristicsForService(new UUID[]{}, service);
-			break;
 		}
 	}
 	
