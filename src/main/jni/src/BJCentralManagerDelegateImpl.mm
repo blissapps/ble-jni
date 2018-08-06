@@ -8,9 +8,11 @@
 #import "BJCentralManagerDelegateImpl.h"
 #include <iostream>
 
+#import "BJPeripheralDelegateImpl.h"
 #import "BJObjectBuilder.h"
 #import "BJJNIUtils.h"
 #import "BJCentralManagerInvoker.h"
+#import "CBPeripheral+Extension.h"
 
 using namespace std;
 
@@ -50,9 +52,9 @@ using namespace std;
  NSDictionary) that contains all of the peripheral scan options that were being
  used by the central manager at the time the app was terminated by the system.
  */
-- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict{
+/*- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict{
 
-}
+}*/
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals{
 
@@ -65,7 +67,19 @@ using namespace std;
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
     JNIEnv* env = [BJJNIUtils attachThread:_jvm];
 
-    jobject wrappedPeripheral = [BJObjectBuilder buildPeripheralFrom:peripheral env:env];
+    jobject wrappedPeripheral = peripheral.javaPeripheral;
+
+    if(wrappedPeripheral == NULL){
+        wrappedPeripheral = [BJObjectBuilder buildPeripheralFrom:peripheral env:env];
+        wrappedPeripheral = env->NewWeakGlobalRef(wrappedPeripheral);
+        peripheral.javaPeripheral = wrappedPeripheral;
+        if (peripheral.delegate == nil) {
+            peripheral.delegate = [[BJPeripheralDelegateImpl alloc] initWithJavaPeripheral:wrappedPeripheral andJavaVM:_jvm];
+        }
+
+        [peripheral retain];
+    }
+
     jobject wrappedAdvertisementData = [BJObjectBuilder buildAdvertisementDataFrom:advertisementData env:env];
 
     [BJCentralManagerInvoker invokeCentralManager:_javaCentralManager
@@ -78,15 +92,52 @@ using namespace std;
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
+    JNIEnv* env = [BJJNIUtils attachThread:_jvm];
 
+    jobject wrappedPeripheral = peripheral.javaPeripheral;
+
+    [BJCentralManagerInvoker invokeCentralManager:_javaCentralManager
+                              connectedPeripheral:wrappedPeripheral
+                                              env:env];
+
+    [BJJNIUtils detachThread:_jvm];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    JNIEnv* env = [BJJNIUtils attachThread:_jvm];
 
+    NSLog(@"Failed to connect");
+    jobject wrappedPeripheral = peripheral.javaPeripheral;
+
+    jobject wrappedError = NULL;
+    if(error != nil){
+        wrappedError = [BJObjectBuilder buildBluetoothExceptionFromNSError:error env:env];
+    }
+
+    [BJCentralManagerInvoker invokeCentralManager:_javaCentralManager
+                      failedToConnectToPeripheral:wrappedPeripheral
+                                            error:wrappedError
+                                              env:env];
+
+    [BJJNIUtils detachThread:_jvm];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    JNIEnv* env = [BJJNIUtils attachThread:_jvm];
 
+    jobject wrappedPeripheral = peripheral.javaPeripheral;
+
+    jobject wrappedError = NULL;
+    if(error != nil){
+        wrappedError = [BJObjectBuilder buildBluetoothExceptionFromNSError:error env:env];
+    }
+
+    [BJCentralManagerInvoker invokeCentralManager:_javaCentralManager
+                           disconnectedPeripheral:wrappedPeripheral
+                                            error:wrappedError
+                                              env:env];
+
+    [BJJNIUtils detachThread:_jvm];
 }
 
 

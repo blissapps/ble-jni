@@ -17,7 +17,7 @@ public enum BluetoothCentralManagerState
 	
 	private final int value;
 	
-	private BluetoothCentralManagerState(int value)
+	BluetoothCentralManagerState(int value)
 	{
 		this.value = value;
 	}

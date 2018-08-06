@@ -30,7 +30,9 @@ generateJni {
     generatedHeadersDir = file("src/main/jni/src")
     classes = [
             'com.blissapplications.ble.BluetoothCentralManager',
-            'com.blissapplications.ble.BluetoothPeripheral'
+            'com.blissapplications.ble.BluetoothPeripheral',
+            'com.blissapplications.ble.BluetoothService',
+            'com.blissapplications.ble.BluetoothCharacteristic'
     ]
 }
 

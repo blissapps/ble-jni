@@ -8,17 +8,36 @@
 #import <Foundation/Foundation.h>
 #import "BJObjectBuilder.h"
 #import "BJJavaClasses.h"
+#import "CBPeripheral+Extension.h"
+#import "CBService+Extension.h"
+#import "CBCharacteristic+Extension.h"
 
 @implementation BJObjectBuilder
+
++ (jobjectArray) buildPeripheralObjectArrayFrom:(NSArray *)peripherals env:(JNIEnv *)env{
+    jclass cls = env->FindClass(BJBluetoothPeripheral_ClassName);
+    jobjectArray result = env->NewObjectArray((jsize)peripherals.count, cls, NULL);
+    UInt index = 0;
+    for (CBPeripheral* peripheral in peripherals) {
+        jobject peripheralJava = [BJObjectBuilder buildPeripheralFrom:peripheral env:env];
+        env->SetObjectArrayElement(result, index, peripheralJava);
+        index = index + 1;
+    }
+    return result;
+}
 
 + (jobject) buildPeripheralFrom:(CBPeripheral*)peripheral env:(JNIEnv*)env{
     jclass cls = env->FindClass(BJBluetoothPeripheral_ClassName);
     jmethodID constructor = env->GetMethodID(cls,
                                              BJ_Constructor_MethodName,
                                              BJBluetoothPeripheral_Constructor_Signature);
+    
     jobject wrappedPeripheral = env->NewObject(cls, constructor, (jlong) peripheral);
+
     return wrappedPeripheral;
 }
+
+
 
 + (jobject) buildAdvertisementDataFrom:(NSDictionary*)advertisementData env:(JNIEnv*)env{
     jclass cls = env->FindClass(BJBluetoothPeripheralAdvertisementData_ClassName);
@@ -38,7 +57,7 @@
 
 
     NSData *manufacturerData = advertisementData[CBAdvertisementDataManufacturerDataKey];
-    jbyteArray manufacturerDataByteArray = [self byteArrayFromNSData:manufacturerData env:env];
+    jbyteArray manufacturerDataByteArray = [self buildByteArrayFromNSData:manufacturerData env:env];
 
     jfieldID manufacturerDataField = env->GetFieldID(cls,
                                                      BJBluetoothPeripheralAdvertisementData_ManufacturerData_FieldName,
@@ -109,12 +128,24 @@
     return wrappedPeripheralAdvertisementData;
 }
 
++ (jobject) buildBluetoothExceptionFromNSError:(NSError*)error env:(JNIEnv*)env {
+    jclass cls = env->FindClass(BJBluetoothException_ClassName);
+    jstring message = env->NewStringUTF([[error localizedDescription] UTF8String]);
+
+    jmethodID constructor = env->GetMethodID(cls,
+                                             BJ_Constructor_MethodName,
+                                             BJBluetoothException_Constructor_Signature);
+    jobject bluetoothException = env->NewObject(cls, constructor, message);
+
+    return bluetoothException;
+}
+
 + (jobjectArray) uuidsObjectArrayFromUUIDsArray:(NSArray*)uuidsArray env:(JNIEnv*)env{
     jclass cls = env->FindClass(Java_UUID_ClassName);
     jobjectArray uuidsObjectArray = env->NewObjectArray((jsize)[uuidsArray count], cls, NULL);
     jsize index = 0;
     for (CBUUID *uuid in uuidsArray) {
-        jobject wrappedUUID = [self uuidFromCBUUID:uuid env:env];
+        jobject wrappedUUID = [self buildUUIDFromCBUUID:uuid env:env];
         env->SetObjectArrayElement(uuidsObjectArray, index, wrappedUUID);
         index = index + 1;
     }
@@ -141,7 +172,7 @@
                                              BJBluetoothServiceData_Constructor_Signature);
     jobject wrappedServiceData = env->NewObject(cls, constructor);
 
-    jobject serviceUUID = [self uuidFromCBUUID:serviceDataUUID env:env];
+    jobject serviceUUID = [self buildUUIDFromCBUUID:serviceDataUUID env:env];
     jfieldID serviceUUIDField = env->GetFieldID(cls,
                                                 BJBluetoothServiceData_ServiceUUID_FieldName,
                                                 BJBluetoothServiceData_ServiceUUID_FieldSignature);
@@ -150,7 +181,7 @@
                         serviceUUIDField,
                         serviceUUID);
 
-    jbyteArray dataByteArray = [self byteArrayFromNSData:data env:env];
+    jbyteArray dataByteArray = [self buildByteArrayFromNSData:data env:env];
     jfieldID dataField = env->GetFieldID(cls,
                                          BJBluetoothServiceData_Data_FieldName,
                                          BJBluetoothServiceData_Data_FieldSignature);
@@ -162,7 +193,7 @@
     return wrappedServiceData;
 }
 
-+ (jobject) uuidFromCBUUID:(CBUUID*)uuid env:(JNIEnv*)env{
++ (jobject) buildUUIDFromCBUUID:(CBUUID*)uuid env:(JNIEnv*)env{
     jclass cls = env->FindClass(Java_UUID_ClassName);
     jmethodID constructor = env->GetMethodID(cls,
                                              BJ_Constructor_MethodName,
@@ -194,7 +225,7 @@
     return wrappedUUID;
 }
 
-+ (jobject) uuidFromNSUUID:(NSUUID*)uuid env:(JNIEnv*)env{
++ (jobject) buildUUIDFromNSUUID:(NSUUID*)uuid env:(JNIEnv*)env{
     jclass cls = env->FindClass(Java_UUID_ClassName);
     jmethodID constructor = env->GetMethodID(cls,
                                              BJ_Constructor_MethodName,
@@ -227,7 +258,7 @@
     return wrappedUUID;
 }
 
-+ (jbyteArray) byteArrayFromNSData:(NSData*)data env:(JNIEnv*)env{
++ (jbyteArray) buildByteArrayFromNSData:(NSData*)data env:(JNIEnv*)env{
     NSUInteger dataLength = data == nil ? 0 : [data length];
     jbyteArray dataByteArray = env->NewByteArray((jsize)dataLength);
     if(data != nil){
@@ -237,6 +268,132 @@
                                 (const jbyte*) [data bytes]);
     }
     return dataByteArray;
+}
+
++ (jobjectArray) buildServiceObjectArrayFrom:(NSArray*)services env:(JNIEnv*)env{
+    jclass cls = env->FindClass(BJBluetoothService_ClassName);
+    jobjectArray result = env->NewObjectArray((jsize)services.count, cls, NULL);
+    UInt index = 0;
+    for (CBService* service in services) {
+        jobject serviceJava = [BJObjectBuilder buildServiceFrom:service env:env];
+        env->SetObjectArrayElement(result, index, serviceJava);
+        index = index + 1;
+    }
+    return result;
+}
+
++ (jobject) buildServiceFrom:(CBService*)service env:(JNIEnv*)env{
+    jclass cls = env->FindClass(BJBluetoothService_ClassName);
+    jmethodID constructor = env->GetMethodID(cls,
+                                             BJ_Constructor_MethodName,
+                                             BJBluetoothService_Constructor_Signature);
+    jobject wrappedPeripheral = service.peripheral.javaPeripheral;
+    jobject wrappedService = env->NewObject(cls, constructor, (jlong) service, (jlong) wrappedPeripheral);
+
+    return wrappedService;
+}
+
++ (jobjectArray) buildCharacteristicObjectArrayFrom:(NSArray*)characteristics env:(JNIEnv*)env{
+    jclass cls = env->FindClass(BJBluetoothCharacteristic_ClassName);
+    jobjectArray result = env->NewObjectArray((jsize)characteristics.count, cls, NULL);
+    UInt index = 0;
+    for (CBCharacteristic* characteristic in characteristics) {
+        jobject characteristicJava = [BJObjectBuilder buildCharacteristicFrom:characteristic env:env];
+        env->SetObjectArrayElement(result, index, characteristicJava);
+        index = index + 1;
+    }
+    return result;
+}
++ (jobject) buildCharacteristicFrom:(CBCharacteristic*)characteristic env:(JNIEnv*)env{
+    jclass cls = env->FindClass(BJBluetoothCharacteristic_ClassName);
+    jmethodID constructor = env->GetMethodID(cls,
+                                             BJ_Constructor_MethodName,
+                                             BJBluetoothCharacteristic_Constructor_Signature);
+    jobject wrappedService = characteristic.service.javaService;
+    jobject wrappedCharacteristic = env->NewObject(cls, constructor, (jlong) characteristic, (jlong) wrappedService);
+
+    return wrappedCharacteristic;
+}
+
++ (NSDictionary*) buildPeripheralConnectionOptionsFrom:(jobject)options env:(JNIEnv*)env{
+
+    jclass cls = env->FindClass(BJBluetoothConnectPeripheralOptions_ClassName);
+
+
+    jfieldID fieldId = env->GetFieldID(cls,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnDisconnection_FieldName,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnDisconnection_FieldSignature);
+    jboolean notifyOnDisconnection = env->GetBooleanField(options, fieldId);
+
+    //10.13 only
+    /*fieldId = env->GetFieldID(cls,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnConnection_FieldName,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnConnection_FieldSignature);
+    jboolean notifyOnConnection = env->GetBooleanField(options, fieldId);
+
+    fieldId = env->GetFieldID(cls,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnNotification_FieldName,
+                              BJBluetoothConnectPeripheralOptions_NotifyOnNotification_FieldSignature);
+    jboolean notifyOnNotification = env->GetBooleanField(options, fieldId);*/
+    return @{
+
+             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @(notifyOnDisconnection)
+             //10.13 only
+             //CBConnectPeripheralOptionNotifyOnConnectionKey: @(notifyOnConnection),
+             //CBConnectPeripheralOptionNotifyOnNotificationKey: @(notifyOnNotification)
+             };
+}
+
++ (NSArray*) buildCBUUIDArrayFromUUIDObjectArray:(jobjectArray)uuidArray env:(JNIEnv*)env{
+    UInt servicesCount = env->GetArrayLength(uuidArray);
+    NSMutableArray *serviceUUIDs = [NSMutableArray arrayWithCapacity:servicesCount];
+
+    for (UInt i = 0; i < servicesCount; i++) {
+        jobject uuidJava = env->GetObjectArrayElement(uuidArray, i);
+        CBUUID *uuid = [BJObjectBuilder buildCBUUIDFromUUID:uuidJava env:env];
+        [serviceUUIDs addObject:uuid];
+    }
+
+    return serviceUUIDs;
+}
+
++ (CBUUID*) buildCBUUIDFromUUID:(jobject)uuid env:(JNIEnv*)env{
+    jclass cls = env->FindClass(Java_UUID_ClassName);
+
+
+    jmethodID methodId = env->GetMethodID(cls,
+                                       Java_UUID_GetMostSignificantBits_MethodName,
+                                       Java_UUID_GetMostSignificantBits_Signature);
+    jlong mostSignificantBits = env->CallLongMethod(uuid, methodId);
+
+    methodId = env->GetMethodID(cls,
+                                Java_UUID_GetLeastSignificantBits_MethodName,
+                                Java_UUID_GetLeastSignificantBits_Signature);
+    jlong leastSignificantBits = env->CallLongMethod(uuid, methodId);
+
+    UInt8 uuidBytes[16];
+
+    uuidBytes[0] = (UInt8) mostSignificantBits & 0xff00000000000000 >> 56;
+    uuidBytes[1] = (UInt8) mostSignificantBits & 0x00ff000000000000 >> 48;
+    uuidBytes[2] = (UInt8) mostSignificantBits & 0x0000ff0000000000 >> 40;
+    uuidBytes[3] = (UInt8) mostSignificantBits & 0x000000ff00000000 >> 32;
+    uuidBytes[4] = (UInt8) mostSignificantBits & 0x00000000ff000000 >> 24;
+    uuidBytes[5] = (UInt8) mostSignificantBits & 0x0000000000ff0000 >> 16;
+    uuidBytes[6] = (UInt8) mostSignificantBits & 0x000000000000ff00 >> 8;
+    uuidBytes[7] = (UInt8) mostSignificantBits & 0x00000000000000ff >> 0;
+
+    uuidBytes[8]  = (UInt8) leastSignificantBits & 0xff00000000000000 >> 56;
+    uuidBytes[9]  = (UInt8) leastSignificantBits & 0x00ff000000000000 >> 48;
+    uuidBytes[10] = (UInt8) leastSignificantBits & 0x0000ff0000000000 >> 40;
+    uuidBytes[11] = (UInt8) leastSignificantBits & 0x000000ff00000000 >> 32;
+    uuidBytes[12] = (UInt8) leastSignificantBits & 0x00000000ff000000 >> 24;
+    uuidBytes[13] = (UInt8) leastSignificantBits & 0x0000000000ff0000 >> 16;
+    uuidBytes[14] = (UInt8) leastSignificantBits & 0x000000000000ff00 >> 8;
+    uuidBytes[15] = (UInt8) leastSignificantBits & 0x00000000000000ff >> 0;
+
+    NSData *uuidData = [NSData dataWithBytesNoCopy:uuidBytes length:16];
+
+    return [CBUUID UUIDWithData:uuidData];
 }
 
 @end

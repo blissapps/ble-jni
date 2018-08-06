@@ -35,4 +35,36 @@ using namespace std;
     env->CallVoidMethod(javaCentralManager, mid);
 }
 
++ (void) invokeCentralManager:(jobject)javaCentralManager
+          connectedPeripheral:(jobject)peripheral
+                          env:(JNIEnv*)env{
+    jclass centralCls = env->GetObjectClass(javaCentralManager);
+    jmethodID mid = env->GetMethodID(centralCls,
+                                     BJCentralManager_ConnectedPeripheral_MethodName,
+                                     BJCentralManager_ConnectedPeripheral_Signature);
+    env->CallVoidMethod(javaCentralManager, mid, peripheral);
+}
+
++ (void) invokeCentralManager:(jobject)javaCentralManager
+  failedToConnectToPeripheral:(jobject)peripheral
+                        error:(jobject)error
+                          env:(JNIEnv*)env{
+    jclass centralCls = env->GetObjectClass(javaCentralManager);
+    jmethodID mid = env->GetMethodID(centralCls,
+                                     BJCentralManager_FailedToConnectToPeripheral_MethodName,
+                                     BJCentralManager_FailedToConnectToPeripheral_Signature);
+    env->CallVoidMethod(javaCentralManager, mid, peripheral, error);
+}
+
++ (void) invokeCentralManager:(jobject)javaCentralManager
+       disconnectedPeripheral:(jobject)peripheral
+                        error:(jobject)error
+                          env:(JNIEnv*)env {
+    jclass centralCls = env->GetObjectClass(javaCentralManager);
+    jmethodID mid = env->GetMethodID(centralCls,
+                                     BJCentralManager_DisconnectedPeripheral_MethodName,
+                                     BJCentralManager_DisconnectedPeripheral_Signature);
+    env->CallVoidMethod(javaCentralManager, mid, peripheral, error);
+}
+
 @end

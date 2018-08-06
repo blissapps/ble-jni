@@ -41,11 +41,43 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_st
 
 /*
  * Class:     com_blissapplications_ble_BluetoothCentralManager
+ * Method:    connectPeripheral
+ * Signature: (JJLcom/blissapplications/ble/BluetoothConnectPeripheralOptions;)V
+ */
+JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_connectPeripheral
+  (JNIEnv *, jobject, jlong, jlong, jobject);
+
+/*
+ * Class:     com_blissapplications_ble_BluetoothCentralManager
+ * Method:    cancelPeripheralConnection
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_cancelPeripheralConnection
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_blissapplications_ble_BluetoothCentralManager
  * Method:    deinitialize
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_deinitialize
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_blissapplications_ble_BluetoothCentralManager
+ * Method:    retrievePeripheralsWithIdentifiers
+ * Signature: (J[Ljava/util/UUID;)[Lcom/blissapplications/ble/BluetoothPeripheral;
+ */
+JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_retrievePeripheralsWithIdentifiers
+  (JNIEnv *, jobject, jlong, jobjectArray);
+
+/*
+ * Class:     com_blissapplications_ble_BluetoothCentralManager
+ * Method:    retrieveConnectedPeripheralsWithServices
+ * Signature: (J[Ljava/util/UUID;)[Lcom/blissapplications/ble/BluetoothPeripheral;
+ */
+JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothCentralManager_retrieveConnectedPeripheralsWithServices
+  (JNIEnv *, jobject, jlong, jobjectArray);
 
 #ifdef __cplusplus
 }

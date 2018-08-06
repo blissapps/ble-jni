@@ -18,4 +18,17 @@
             advertisementData:(jobject)advertisementData
                           env:(JNIEnv*)env;
 
++ (void) invokeCentralManager:(jobject)javaCentralManager
+          connectedPeripheral:(jobject)peripheral
+                          env:(JNIEnv*)env;
+
++ (void) invokeCentralManager:(jobject)javaCentralManager
+  failedToConnectToPeripheral:(jobject)peripheral
+                        error:(jobject)error
+                          env:(JNIEnv*)env;
+
++ (void) invokeCentralManager:(jobject)javaCentralManager
+       disconnectedPeripheral:(jobject)peripheral
+                        error:(jobject)error
+                          env:(JNIEnv*)env;
 @end
