@@ -32,7 +32,8 @@ generateJni {
             'com.blissapplications.ble.BluetoothCentralManager',
             'com.blissapplications.ble.BluetoothPeripheral',
             'com.blissapplications.ble.BluetoothService',
-            'com.blissapplications.ble.BluetoothCharacteristic'
+            'com.blissapplications.ble.BluetoothCharacteristic',
+            'com.blissapplications.ble.BluetoothDescriptor'
     ]
 }
 

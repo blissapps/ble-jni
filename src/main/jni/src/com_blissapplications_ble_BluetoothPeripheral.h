@@ -58,10 +58,10 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discov
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    discoverDescriptorsForCharacteristic
- * Signature: (JLcom/blissapplications/ble/BluetoothCharacteristic;)V
+ * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discoverDescriptorsForCharacteristic
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral

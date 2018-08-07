@@ -18,4 +18,9 @@
 discoveredCharacteristicsForService:(jobject)javaService
                     error:(jobject) javaBluetoothException
                       env:(JNIEnv*) env;
+
++ (void) invokePeripheral:(jobject) javaPeripheral
+discoveredDescriptorsForCharacteristic:(jobject)javaCharacteristic
+                    error:(jobject) javaBluetoothException
+                      env:(JNIEnv*) env;
 @end

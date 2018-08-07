@@ -71,12 +71,11 @@ using namespace std;
 
     if(wrappedPeripheral == NULL){
         wrappedPeripheral = [BJObjectBuilder buildPeripheralFrom:peripheral env:env];
-        wrappedPeripheral = env->NewWeakGlobalRef(wrappedPeripheral);
+        wrappedPeripheral = env->NewGlobalRef(wrappedPeripheral);
         peripheral.javaPeripheral = wrappedPeripheral;
         if (peripheral.delegate == nil) {
             peripheral.delegate = [[BJPeripheralDelegateImpl alloc] initWithJavaPeripheral:wrappedPeripheral andJavaVM:_jvm];
         }
-
         [peripheral retain];
     }
 

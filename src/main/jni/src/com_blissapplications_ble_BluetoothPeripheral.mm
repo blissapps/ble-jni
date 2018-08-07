@@ -54,3 +54,12 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discov
         [peripheral discoverCharacteristics:characteristicUUIDs forService:service];
     }
 }
+
+JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discoverDescriptorsForCharacteristic
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle, jlong characteristicHandle){
+    @autoreleasepool{
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        CBCharacteristic *characteristic = (CBCharacteristic*) characteristicHandle;
+        [peripheral discoverDescriptorsForCharacteristic:characteristic];
+    }
+}

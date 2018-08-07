@@ -12,6 +12,10 @@ public class BluetoothCharacteristic
 {
 	private BluetoothService service;
 	private long nativeCharacteristicHandle;
+	long getNativeCharacteristicHandle()
+	{
+		return nativeCharacteristicHandle;
+	}
 	
 	private native UUID getIdentifier(long nativeCharacteristicHandle);
 	
@@ -50,5 +54,9 @@ public class BluetoothCharacteristic
 	
 	public boolean isNotifying(){
 		return isNotifying(nativeCharacteristicHandle);
+	}
+
+	public BluetoothService getService() {
+		return service;
 	}
 }

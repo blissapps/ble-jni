@@ -43,13 +43,20 @@ public class BluetoothPeripheralListenerImpl implements BluetoothPeripheralListe
 		for (BluetoothCharacteristic characteristic : characteristics)
 		{
 			System.out.printf("Discovered characteristic %s on service %s of peripheral %s\n", characteristic.getIdentifier(), service.getIdentifier(), peripheral.getIdentifier());
+			System.out.printf("Characteristic properties\n%s\n", characteristic.getProperties());
+			peripheral.discoverDescriptorsForCharacteristic(characteristic);
 		}
 	}
 	
 	@Override
 	public void discoveredDescriptorsForCharacteristic(BluetoothPeripheral peripheral, BluetoothCharacteristic characteristic, BluetoothException error)
 	{
-	
+		BluetoothDescriptor[] descriptors = characteristic.getDescriptors();
+
+		for (BluetoothDescriptor descriptor : descriptors)
+		{
+			System.out.printf("Discovered descriptor %s characteristic %s on service %s of peripheral %s\n",descriptor.getIdentifier(), characteristic.getIdentifier(), characteristic.getService().getIdentifier(), peripheral.getIdentifier());
+		}
 	}
 	
 	@Override

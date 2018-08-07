@@ -93,7 +93,21 @@ using namespace std;
 {}
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{}
+{
+    JNIEnv* env = [BJJNIUtils attachThread:_jvm];
+    
+    jobject wrappedError = NULL;
+    if(error != nil){
+        wrappedError = [BJObjectBuilder buildBluetoothExceptionFromNSError:error env:env];
+    }
+    
+    [BJPeripheralInvoker invokePeripheral:_javaPeripheral
+   discoveredDescriptorsForCharacteristic:characteristic.javaCharacteristic
+                                    error:wrappedError
+                                      env:env];
+    
+    [BJJNIUtils detachThread:_jvm];
+}
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {}

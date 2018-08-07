@@ -60,3 +60,4 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 libs/libble-jni.dylib
+src/main/libs/libble-jni.dylib

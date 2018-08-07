@@ -35,18 +35,23 @@
 		7A8607782118F4F60001B48D /* com_blissapplications_ble_BluetoothService.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A86075D2118F4F60001B48D /* com_blissapplications_ble_BluetoothService.h */; };
 		7A8607792118F4F60001B48D /* com_blissapplications_ble_BluetoothService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A86075E2118F4F60001B48D /* com_blissapplications_ble_BluetoothService.mm */; };
 		7A86077B2118F5870001B48D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A86077A2118F5870001B48D /* CoreBluetooth.framework */; };
-		7A86077D2118F9150001B48D /* libble-jni.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A86072B2118F4CA0001B48D /* libble-jni.dylib */; };
+		7A86077D2118F9150001B48D /* libble-jni.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 7A86072B2118F4CA0001B48D /* libble-jni.dylib */; };
+		E2E273A021191F38004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = E2E2739F21191F38004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.h */; };
+		E2E273A221191F59004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2E273A121191F59004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.mm */; };
+		E2E273A5211922D7004FE3A0 /* CBDescriptor+Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = E2E273A3211922D7004FE3A0 /* CBDescriptor+Extension.h */; };
+		E2E273A6211922D7004FE3A0 /* CBDescriptor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E273A4211922D7004FE3A0 /* CBDescriptor+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7A86077C2118F9060001B48D /* CopyFiles */ = {
+		7A86077C2118F9060001B48D /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = ../../../../../../libs;
+			dstPath = ../../../../../libs;
 			dstSubfolderSpec = 16;
 			files = (
-				7A86077D2118F9150001B48D /* libble-jni.dylib in CopyFiles */,
+				7A86077D2118F9150001B48D /* libble-jni.dylib in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -81,6 +86,10 @@
 		7A86075D2118F4F60001B48D /* com_blissapplications_ble_BluetoothService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothService.h; sourceTree = "<group>"; };
 		7A86075E2118F4F60001B48D /* com_blissapplications_ble_BluetoothService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothService.mm; sourceTree = "<group>"; };
 		7A86077A2118F5870001B48D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E2E2739F21191F38004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = com_blissapplications_ble_BluetoothDescriptor.h; sourceTree = "<group>"; };
+		E2E273A121191F59004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = com_blissapplications_ble_BluetoothDescriptor.mm; sourceTree = "<group>"; };
+		E2E273A3211922D7004FE3A0 /* CBDescriptor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBDescriptor+Extension.h"; sourceTree = "<group>"; };
+		E2E273A4211922D7004FE3A0 /* CBDescriptor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBDescriptor+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +139,8 @@
 				7A8607502118F4F60001B48D /* BJPeripheralInvoker.mm */,
 				7A8607512118F4F60001B48D /* CBCharacteristic+Extension.h */,
 				7A8607522118F4F60001B48D /* CBCharacteristic+Extension.mm */,
+				E2E273A3211922D7004FE3A0 /* CBDescriptor+Extension.h */,
+				E2E273A4211922D7004FE3A0 /* CBDescriptor+Extension.m */,
 				7A8607532118F4F60001B48D /* CBPeripheral+Extension.h */,
 				7A8607542118F4F60001B48D /* CBPeripheral+Extension.mm */,
 				7A8607552118F4F60001B48D /* CBService+Extension.h */,
@@ -138,6 +149,8 @@
 				7A8607582118F4F60001B48D /* com_blissapplications_ble_BluetoothCentralManager.mm */,
 				7A8607592118F4F60001B48D /* com_blissapplications_ble_BluetoothCharacteristic.h */,
 				7A86075A2118F4F60001B48D /* com_blissapplications_ble_BluetoothCharacteristic.mm */,
+				E2E2739F21191F38004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.h */,
+				E2E273A121191F59004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.mm */,
 				7A86075B2118F4F60001B48D /* com_blissapplications_ble_BluetoothPeripheral.h */,
 				7A86075C2118F4F60001B48D /* com_blissapplications_ble_BluetoothPeripheral.mm */,
 				7A86075D2118F4F60001B48D /* com_blissapplications_ble_BluetoothService.h */,
@@ -160,8 +173,10 @@
 				7A8607742118F4F60001B48D /* com_blissapplications_ble_BluetoothCharacteristic.h in Headers */,
 				7A8607762118F4F60001B48D /* com_blissapplications_ble_BluetoothPeripheral.h in Headers */,
 				7A8607642118F4F60001B48D /* BJJNIUtils.h in Headers */,
+				E2E273A021191F38004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.h in Headers */,
 				7A8607702118F4F60001B48D /* CBService+Extension.h in Headers */,
 				7A86075F2118F4F60001B48D /* BJCentralManagerDelegateImpl.h in Headers */,
+				E2E273A5211922D7004FE3A0 /* CBDescriptor+Extension.h in Headers */,
 				7A8607632118F4F60001B48D /* BJJavaClasses.h in Headers */,
 				7A8607682118F4F60001B48D /* BJPeripheralDelegateImpl.h in Headers */,
 				7A8607662118F4F60001B48D /* BJObjectBuilder.h in Headers */,
@@ -180,7 +195,7 @@
 				7A8607272118F4CA0001B48D /* Sources */,
 				7A8607282118F4CA0001B48D /* Frameworks */,
 				7A8607292118F4CA0001B48D /* Headers */,
-				7A86077C2118F9060001B48D /* CopyFiles */,
+				7A86077C2118F9060001B48D /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -226,7 +241,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E273A221191F59004FE3A0 /* com_blissapplications_ble_BluetoothDescriptor.mm in Sources */,
 				7A8607712118F4F60001B48D /* CBService+Extension.mm in Sources */,
+				E2E273A6211922D7004FE3A0 /* CBDescriptor+Extension.m in Sources */,
 				7A8607732118F4F60001B48D /* com_blissapplications_ble_BluetoothCentralManager.mm in Sources */,
 				7A86076B2118F4F60001B48D /* BJPeripheralInvoker.mm in Sources */,
 				7A8607692118F4F60001B48D /* BJPeripheralDelegateImpl.mm in Sources */,
@@ -371,6 +388,7 @@
 				7A86073E2118F4CB0001B48D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

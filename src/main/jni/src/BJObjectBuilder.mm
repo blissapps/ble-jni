@@ -11,6 +11,7 @@
 #import "CBPeripheral+Extension.h"
 #import "CBService+Extension.h"
 #import "CBCharacteristic+Extension.h"
+#import "CBDescriptor+Extension.h"
 
 @implementation BJObjectBuilder
 
@@ -292,7 +293,7 @@
                                                  BJBluetoothService_Constructor_Signature);
         jobject wrappedPeripheral = service.peripheral.javaPeripheral;
         serviceJava = env->NewObject(cls, constructor, (jlong) service, (jlong) wrappedPeripheral);
-        serviceJava = env->NewWeakGlobalRef(serviceJava);
+        serviceJava = env->NewGlobalRef(serviceJava);
         service.javaService = serviceJava;
     }
     
@@ -311,15 +312,148 @@
     return result;
 }
 + (jobject) buildCharacteristicFrom:(CBCharacteristic*)characteristic env:(JNIEnv*)env{
-    jclass cls = env->FindClass(BJBluetoothCharacteristic_ClassName);
+    
+    jobject characteristicJava = characteristic.javaCharacteristic;
+    
+    if(characteristicJava == NULL){
+        jclass cls = env->FindClass(BJBluetoothCharacteristic_ClassName);
+        jmethodID constructor = env->GetMethodID(cls,
+                                                 BJ_Constructor_MethodName,
+                                                 BJBluetoothCharacteristic_Constructor_Signature);
+        jobject wrappedService = characteristic.service.javaService;
+        characteristicJava = env->NewObject(cls, constructor, (jlong) characteristic, (jlong) wrappedService);
+        characteristicJava = env->NewGlobalRef(characteristicJava);
+        characteristic.javaCharacteristic = characteristicJava;
+    }
+    
+    return characteristicJava;
+}
+
+
+;
+
++ (jobjectArray) buildDescriptorObjectArrayFrom:(NSArray*)descriptors env:(JNIEnv*)env{
+    jclass cls = env->FindClass(BJBluetoothDescriptor_ClassName);
+    jobjectArray result = env->NewObjectArray((jsize)descriptors.count, cls, NULL);
+    UInt index = 0;
+    for (CBDescriptor* descriptor in descriptors) {
+        jobject descriptorJava = [BJObjectBuilder buildDescriptorFrom:descriptor env:env];
+        env->SetObjectArrayElement(result, index, descriptorJava);
+        index = index + 1;
+    }
+    return result;
+}
+
++ (jobject) buildDescriptorFrom:(CBDescriptor*)descriptor env:(JNIEnv*)env{
+    jobject descriptorJava = descriptor.javaDescriptor;
+    
+    if(descriptorJava == NULL){
+        jclass cls = env->FindClass(BJBluetoothDescriptor_ClassName);
+        jmethodID constructor = env->GetMethodID(cls,
+                                                 BJ_Constructor_MethodName,
+                                                 BJBluetoothDescriptor_Constructor_Signature);
+        jobject wrappedCharacteristic = descriptor.characteristic.javaCharacteristic;
+        descriptorJava = env->NewObject(cls, constructor, (jlong) descriptor, (jlong) wrappedCharacteristic);
+        descriptorJava = env->NewGlobalRef(descriptorJava);
+        descriptor.javaDescriptor = descriptorJava;
+    }
+    
+    return descriptorJava;
+}
+
++ (jobject) buildCharacteristicPropertiesFrom:(CBCharacteristicProperties)properties env:(JNIEnv*)env {
+    jclass cls = env->FindClass(BJBluetoothCharacteristicProperties_ClassName);
     jmethodID constructor = env->GetMethodID(cls,
                                              BJ_Constructor_MethodName,
-                                             BJBluetoothCharacteristic_Constructor_Signature);
-    jobject wrappedService = characteristic.service.javaService;
-    jobject wrappedCharacteristic = env->NewObject(cls, constructor, (jlong) characteristic, (jlong) wrappedService);
+                                             BJBluetoothCharacteristicProperties_Constructor_Signature);
+ 
+    jobject wrappedCharacteristicProperties = env->NewObject(cls, constructor);
 
-    return wrappedCharacteristic;
+
+    BOOL canBroadcast = (properties & CBCharacteristicPropertyBroadcast) == CBCharacteristicPropertyBroadcast;
+    jfieldID canBroadcastField = env->GetFieldID(cls,
+                                                 BJBluetoothCharacteristicProperties_CanBroadcast_FieldName,
+                                                 BJBluetoothCharacteristicProperties_CanBroadcast_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canBroadcastField,
+                         canBroadcast);
+    
+    BOOL canRead = (properties & CBCharacteristicPropertyRead) == CBCharacteristicPropertyRead;
+    jfieldID canReadField = env->GetFieldID(cls,
+                                            BJBluetoothCharacteristicProperties_CanRead_FieldName,
+                                            BJBluetoothCharacteristicProperties_CanRead_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canReadField,
+                         canRead);
+    
+    BOOL canBeWrittenWithoutResponse = (properties & CBCharacteristicPropertyWriteWithoutResponse) == CBCharacteristicPropertyWriteWithoutResponse;
+    jfieldID canBeWrittenWithoutResponseField = env->GetFieldID(cls,
+                                                                BJBluetoothCharacteristicProperties_CanBeWrittenWithoutResponse_FieldName,
+                                                                BJBluetoothCharacteristicProperties_CanBeWrittenWithoutResponse_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canBeWrittenWithoutResponseField,
+                         canBeWrittenWithoutResponse);
+    
+    BOOL canBeWritten = (properties & CBCharacteristicPropertyWrite) == CBCharacteristicPropertyWrite;
+    jfieldID canBeWrittenField = env->GetFieldID(cls,
+                                                 BJBluetoothCharacteristicProperties_CanBeWritten_FieldName,
+                                                 BJBluetoothCharacteristicProperties_CanBeWritten_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canBeWrittenField,
+                         canBeWritten);
+    
+    BOOL canNotify = (properties & CBCharacteristicPropertyNotify) == CBCharacteristicPropertyNotify;
+    jfieldID canNotifyField = env->GetFieldID(cls,
+                                              BJBluetoothCharacteristicProperties_CanNotify_FieldName,
+                                              BJBluetoothCharacteristicProperties_CanNotify_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canNotifyField,
+                         canNotify);
+    
+    BOOL canIndicate = (properties & CBCharacteristicPropertyIndicate) == CBCharacteristicPropertyIndicate;
+    jfieldID canIndicateField = env->GetFieldID(cls,
+                                                BJBluetoothCharacteristicProperties_CanIndicate_FieldName,
+                                                BJBluetoothCharacteristicProperties_CanIndicate_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         canIndicateField,
+                         canIndicate);
+    
+    BOOL authenticatedSignedWrites = (properties & CBCharacteristicPropertyAuthenticatedSignedWrites) == CBCharacteristicPropertyAuthenticatedSignedWrites;
+    jfieldID authenticatedSignedWritesField = env->GetFieldID(cls,
+                                                              BJBluetoothCharacteristicProperties_AuthenticatedSignedWrites_FieldName,
+                                                              BJBluetoothCharacteristicProperties_AuthenticatedSignedWrites_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         authenticatedSignedWritesField,
+                         authenticatedSignedWrites);
+    
+    BOOL hasExtendedProperties = (properties & CBCharacteristicPropertyExtendedProperties) == CBCharacteristicPropertyExtendedProperties;
+    jfieldID hasExtendedPropertiesField = env->GetFieldID(cls,
+                                                          BJBluetoothCharacteristicProperties_HasExtendedProperties_FieldName,
+                                                          BJBluetoothCharacteristicProperties_HasExtendedProperties_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         hasExtendedPropertiesField,
+                         hasExtendedProperties);
+    
+    BOOL indicateEncryptionRequired = (properties & CBCharacteristicPropertyIndicateEncryptionRequired) == CBCharacteristicPropertyIndicateEncryptionRequired;
+    jfieldID indicateEncryptionRequiredField = env->GetFieldID(cls,
+                                                               BJBluetoothCharacteristicProperties_IndicateEncryptionRequired_FieldName,
+                                                               BJBluetoothCharacteristicProperties_IndicateEncryptionRequired_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         indicateEncryptionRequiredField,
+                         indicateEncryptionRequired);
+    
+    BOOL notifyEncryptionRequired = (properties & CBCharacteristicPropertyNotifyEncryptionRequired) == CBCharacteristicPropertyNotifyEncryptionRequired;
+    jfieldID notifyEncryptionRequiredField = env->GetFieldID(cls,
+                                                               BJBluetoothCharacteristicProperties_NotifyEncryptionRequired_FieldName,
+                                                               BJBluetoothCharacteristicProperties_NotifyEncryptionRequired_FieldSignature);
+    env->SetBooleanField(wrappedCharacteristicProperties,
+                         notifyEncryptionRequiredField,
+                         notifyEncryptionRequired);
+    
+    return wrappedCharacteristicProperties;
 }
+
+#pragma mark - ObjC Builder
 
 + (NSDictionary*) buildPeripheralConnectionOptionsFrom:(jobject)options env:(JNIEnv*)env{
 

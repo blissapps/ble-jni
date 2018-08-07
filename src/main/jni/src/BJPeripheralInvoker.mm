@@ -31,4 +31,15 @@ discoveredCharacteristicsForService:(jobject)javaService
     env->CallVoidMethod(javaPeripheral, mid, javaService, javaBluetoothException);
 }
 
++ (void) invokePeripheral:(jobject) javaPeripheral
+discoveredDescriptorsForCharacteristic:(jobject)javaCharacteristic
+                    error:(jobject) javaBluetoothException
+                      env:(JNIEnv*) env{
+    jclass peripheralCls = env->GetObjectClass(javaPeripheral);
+    jmethodID mid = env->GetMethodID(peripheralCls,
+                                    BJBluetoothPeripheral_DiscoveredDescriptorsForCharacteristic_MethodName,
+                                     BJBluetoothPeripheral_DiscoveredDescriptorsForCharacteristic_Signature);
+    env->CallVoidMethod(javaPeripheral, mid, javaCharacteristic, javaBluetoothException);
+}
+
 @end

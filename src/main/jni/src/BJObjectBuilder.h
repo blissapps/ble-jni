@@ -23,6 +23,9 @@
 + (jobject) buildServiceFrom:(CBService*)service env:(JNIEnv*)env;
 + (jobjectArray) buildCharacteristicObjectArrayFrom:(NSArray*)characteristics env:(JNIEnv*)env;
 + (jobject) buildCharacteristicFrom:(CBCharacteristic*)characteristic env:(JNIEnv*)env;
++ (jobjectArray) buildDescriptorObjectArrayFrom:(NSArray*)descriptors env:(JNIEnv*)env;
++ (jobject) buildDescriptorFrom:(CBDescriptor*)descriptor env:(JNIEnv*)env;
++ (jobject) buildCharacteristicPropertiesFrom:(CBCharacteristicProperties)properties env:(JNIEnv*)env;
 
 //ObjC bbuilders
 
