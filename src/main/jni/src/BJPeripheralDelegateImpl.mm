@@ -41,7 +41,18 @@ using namespace std;
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"Updated RSSI: %@", error);
+    JNIEnv* env = [BJJNIUtils attachThread:_jvm];
+    
+    jobject wrappedError = NULL;
+    if(error != nil){
+        wrappedError = [BJObjectBuilder buildBluetoothExceptionFromNSError:error env:env];
+    }
+    
+    [BJPeripheralInvoker invokePeripheralUpdatedRSSI:_javaPeripheral
+                                               error:wrappedError
+                                                 env:env];
+    
+    [BJJNIUtils detachThread:_jvm];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error

@@ -84,6 +84,11 @@
 "L" BJBluetoothException_ClassName ";" \
 ")V"
 
+#define BJBluetoothPeripheral_UpdatedRSSI_MethodName "updatedRSSI"
+#define BJBluetoothPeripheral_UpdatedRSSI_Signature "(" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
 #define BJBluetoothService_Constructor_Signature "("\
 "J"\
 "L" BJBluetoothPeripheral_ClassName ";" \

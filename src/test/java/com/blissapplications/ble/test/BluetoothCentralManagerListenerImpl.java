@@ -85,6 +85,7 @@ public class BluetoothCentralManagerListenerImpl implements BluetoothCentralMana
 		
 		UUID c1 = UUID.fromString("0c4c3000-7700-46f4-aa96-d5e974e32a54");
 		System.out.printf("discoverServices: %s\n", c1);
+		peripheral.readRSSI();
 		peripheral.discoverServices(new UUID[] {});
 	}
 	

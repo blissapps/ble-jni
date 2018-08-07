@@ -9,7 +9,7 @@
 using namespace std;
 
 JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getIdentifier
-(JNIEnv *env, jobject, jlong peripheralHandle){
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle){
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         NSUUID *uuid = [peripheral identifier];
@@ -18,7 +18,7 @@ JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_get
 }
 
 JNIEXPORT jstring JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getName
-(JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle) {
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         NSString* name = [peripheral name];
@@ -26,26 +26,20 @@ JNIEXPORT jstring JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_get
     }
 }
 
-JNIEXPORT jint JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getState
-(JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
-    @autoreleasepool{
-        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
-        return [peripheral state];
-    }
-}
-
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discoverServices
-(JNIEnv *env, jobject peripheral, jlong peripheralHandle, jobjectArray services){
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle, jobjectArray services){
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         NSArray* serviceUUIDs = [BJObjectBuilder buildCBUUIDArrayFromUUIDObjectArray:services env:env];
         [peripheral discoverServices:serviceUUIDs];
     }
-
+    
 }
 
+// Discover included services
+
 JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getServices
-(JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle) {
     @autoreleasepool{
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         NSArray* services = [peripheral services];
@@ -70,5 +64,30 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discov
         CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
         CBCharacteristic *characteristic = (CBCharacteristic*) characteristicHandle;
         [peripheral discoverDescriptorsForCharacteristic:characteristic];
+    }
+}
+
+JNIEXPORT jint JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getState
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle) {
+    @autoreleasepool{
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        return [peripheral state];
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_readRSSI
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle){
+    @autoreleasepool{
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        [peripheral readRSSI];
+    }
+}
+
+JNIEXPORT jdouble JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getRSSI
+(JNIEnv *env, jobject javaPeripheral, jlong peripheralHandle){
+    @autoreleasepool{
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        double rssi = [[peripheral RSSI] doubleValue];
+        return rssi;
     }
 }

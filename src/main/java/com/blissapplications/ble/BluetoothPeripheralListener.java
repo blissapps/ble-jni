@@ -22,7 +22,7 @@ public interface BluetoothPeripheralListener
 	
 	void updatedNotificationStateForCharacteristic(BluetoothPeripheral peripheral, BluetoothCharacteristic characteristic, BluetoothException error);
 	
-	void readRSSI(BluetoothPeripheral peripheral, double rssi, BluetoothException error);
+	void updatedRSSI(BluetoothPeripheral peripheral, BluetoothException error);
 	
 	void updatedName(BluetoothPeripheral peripheral);
 	

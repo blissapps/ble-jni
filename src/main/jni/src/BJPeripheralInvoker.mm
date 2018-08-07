@@ -37,9 +37,19 @@ discoveredDescriptorsForCharacteristic:(jobject)javaCharacteristic
                       env:(JNIEnv*) env{
     jclass peripheralCls = env->GetObjectClass(javaPeripheral);
     jmethodID mid = env->GetMethodID(peripheralCls,
-                                    BJBluetoothPeripheral_DiscoveredDescriptorsForCharacteristic_MethodName,
+                                     BJBluetoothPeripheral_DiscoveredDescriptorsForCharacteristic_MethodName,
                                      BJBluetoothPeripheral_DiscoveredDescriptorsForCharacteristic_Signature);
     env->CallVoidMethod(javaPeripheral, mid, javaCharacteristic, javaBluetoothException);
+}
+
++ (void) invokePeripheralUpdatedRSSI:(jobject) javaPeripheral
+                               error:(jobject) javaBluetoothException
+                                 env:(JNIEnv*) env {
+    jclass peripheralCls = env->GetObjectClass(javaPeripheral);
+    jmethodID mid = env->GetMethodID(peripheralCls,
+                                     BJBluetoothPeripheral_UpdatedRSSI_MethodName,
+                                     BJBluetoothPeripheral_UpdatedRSSI_Signature);
+    env->CallVoidMethod(javaPeripheral, mid, javaBluetoothException);
 }
 
 @end

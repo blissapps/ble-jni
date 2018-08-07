@@ -90,9 +90,9 @@ public class BluetoothPeripheralListenerImpl implements BluetoothPeripheralListe
 	}
 	
 	@Override
-	public void readRSSI(BluetoothPeripheral peripheral, double rssi, BluetoothException error)
+	public void updatedRSSI(BluetoothPeripheral peripheral, BluetoothException error)
 	{
-	
+		System.out.printf("Peripheral <%s> RSSI: %.2f dB\n", peripheral.getName(), peripheral.getRSSI());
 	}
 	
 	@Override

@@ -23,4 +23,8 @@ discoveredCharacteristicsForService:(jobject)javaService
 discoveredDescriptorsForCharacteristic:(jobject)javaCharacteristic
                     error:(jobject) javaBluetoothException
                       env:(JNIEnv*) env;
+
++ (void) invokePeripheralUpdatedRSSI:(jobject) javaPeripheral
+                               error:(jobject) javaBluetoothException
+                                 env:(JNIEnv*) env;
 @end

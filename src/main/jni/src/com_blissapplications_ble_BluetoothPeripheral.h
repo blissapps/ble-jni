@@ -121,6 +121,14 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_readRS
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
+ * Method:    getRSSI
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getRSSI
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    canSendWriteWithoutResponse
  * Signature: (J)Z
  */
