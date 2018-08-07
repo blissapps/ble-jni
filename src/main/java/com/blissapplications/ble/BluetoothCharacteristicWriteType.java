@@ -8,6 +8,6 @@ package com.blissapplications.ble;
  */
 public enum BluetoothCharacteristicWriteType
 {
-	withResponse,
-	withoutResponse
+	WITH_RESPONSE,
+	WITHOUT_RESPONSE
 }

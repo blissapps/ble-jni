@@ -537,4 +537,34 @@
     return [CBUUID UUIDWithData:uuidData];
 }
 
++ (NSData*) buildNSDataFromByteArray:(jbyteArray)byteArray env:(JNIEnv*)env{
+    jsize length = env->GetArrayLength(byteArray);
+    jboolean isCopy = false;
+    jbyte* bytes = env->GetByteArrayElements(byteArray, &isCopy);
+    
+    NSData *data = [NSData dataWithBytes:bytes length:length];
+    
+    env->ReleaseByteArrayElements(byteArray, bytes, JNI_COMMIT);
+    
+    return data;
+}
+
++ (CBCharacteristicWriteType) buildCBCharacteristicWriteTypeFromWriteType:(jobject)writeTypeJava env:(JNIEnv*)env{
+    jclass enumClass = env->FindClass(BJBluetoothCharacteristicWriteType_ClassName);
+    jmethodID getNameMethod = env->GetMethodID(enumClass,
+                                               BJBluetoothCharacteristicWriteType_Name_MethodName,
+                                               BJBluetoothCharacteristicWriteType_Name_MethodSignature);
+    jstring value = (jstring)env->CallObjectMethod(writeTypeJava, getNameMethod);
+    const char* valueNative = env->GetStringUTFChars(value, 0);
+    if (strcmp(valueNative, BJBluetoothCharacteristicWriteType_Value_WITH_RESPONSE) == 0) {
+        return CBCharacteristicWriteWithResponse;
+    }
+    if (strcmp(valueNative, BJBluetoothCharacteristicWriteType_Value_WITHOUT_RESPONSE) == 0) {
+        return CBCharacteristicWriteWithoutResponse;
+    }
+    
+    assert(false);
+    return CBCharacteristicWriteWithResponse;
+}
+
 @end

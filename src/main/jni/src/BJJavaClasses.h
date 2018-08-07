@@ -12,23 +12,26 @@
 #define Java_String_ClassName Java_Lang_Namespace "String"
 
 #define Java_Util_Namespace "java/util/"
+
+#pragma mark - java.util.UUID
+
 #define Java_UUID_ClassName Java_Util_Namespace "UUID"
+
+#define Java_UUID_Constructor_Signature "(JJ)V"
+
+#define Java_UUID_GetMostSignificantBits_MethodName "getMostSignificantBits"
+#define Java_UUID_GetMostSignificantBits_Signature "()J"
+
+#define Java_UUID_GetLeastSignificantBits_MethodName "getLeastSignificantBits"
+#define Java_UUID_GetLeastSignificantBits_Signature "()J"
+
+#pragma mark - BJ
 
 #define BJ_Namespace "com/blissapplications/ble/"
 
-#define BJBluetoothPeripheral_ClassName BJ_Namespace "BluetoothPeripheral"
-
-#define BJBluetoothPeripheralAdvertisementData_ClassName BJ_Namespace "BluetoothPeripheralAdvertisementData"
-
-#define BJBluetoothPeripheral_ClassName BJ_Namespace "BluetoothPeripheral"
-
-#define BJBluetoothService_ClassName BJ_Namespace "BluetoothService"
-
-#define BJBluetoothCharacteristic_ClassName BJ_Namespace "BluetoothCharacteristic"
-
-#define BJBluetoothDescriptor_ClassName BJ_Namespace "BluetoothDescriptor"
-
 #define BJ_Constructor_MethodName "<init>"
+
+#pragma mark - BJCentralManager
 
 #define BJCentralManager_UpdatedState_MethodName "updatedState"
 #define BJCentralManager_UpdatedState_Signature "()V"
@@ -57,19 +60,28 @@
 "L" BJBluetoothPeripheralAdvertisementData_ClassName ";" \
 ")V"
 
-#define Java_UUID_Constructor_Signature "(JJ)V"
 
-#define Java_UUID_GetMostSignificantBits_MethodName "getMostSignificantBits"
-#define Java_UUID_GetMostSignificantBits_Signature "()J"
+#pragma mark - BJBluetoothPeripheral
 
-#define Java_UUID_GetLeastSignificantBits_MethodName "getLeastSignificantBits"
-#define Java_UUID_GetLeastSignificantBits_Signature "()J"
+#define BJBluetoothPeripheral_ClassName BJ_Namespace "BluetoothPeripheral"
 
 #define BJBluetoothPeripheral_Constructor_Signature "(J)V"
 
 #define BJBluetoothPeripheral_DiscoveredServices_MethodName "discoveredServices"
 #define BJBluetoothPeripheral_DiscoveredServices_Signature "(" \
 "L" BJBluetoothException_ClassName ";" \
+")V"
+
+#define BJBluetoothPeripheral_DiscoveredIncludedServicesForService_MethodName "discoveredIncludedServicesForService"
+#define BJBluetoothPeripheral_DiscoveredIncludedServicesForService_Signature "(" \
+"L" BJBluetoothService_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
+
+#define BJBluetoothPeripheral_ModifiedServices_MethodName "modifiedServices"
+#define BJBluetoothPeripheral_ModifiedServices_Signature "(" \
+"[L" BJBluetoothService_ClassName ";" \
 ")V"
 
 #define BJBluetoothPeripheral_DiscoveredCharacteristicsForService_MethodName "discoveredCharacteristicsForService"
@@ -84,20 +96,66 @@
 "L" BJBluetoothException_ClassName ";" \
 ")V"
 
+
+#define BJBluetoothPeripheral_UpdatedValueForCharacteristic_MethodName "updatedValueForCharacteristic"
+#define BJBluetoothPeripheral_UpdatedValueForCharacteristic_Signature "(" \
+"L" BJBluetoothCharacteristic_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
+#define BJBluetoothPeripheral_UpdatedValueForDescriptor_MethodName "updatedValueForDescriptor"
+#define BJBluetoothPeripheral_UpdatedValueForDescriptor_Signature "(" \
+"L" BJBluetoothDescriptor_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
+#define BJBluetoothPeripheral_WroteValueForCharacteristic_MethodName "wroteValueForCharacteristic"
+#define BJBluetoothPeripheral_WroteValueForCharacteristic_Signature "(" \
+"L" BJBluetoothCharacteristic_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
+#define BJBluetoothPeripheral_WroteValueForDescriptor_MethodName "wroteValueForDescriptor"
+#define BJBluetoothPeripheral_WroteValueForDescriptor_Signature "(" \
+"L" BJBluetoothDescriptor_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
+#define BJBluetoothPeripheral_UpdatedNotificationStateForCharacteristic_MethodName "updatedNotificationStateForCharacteristic"
+#define BJBluetoothPeripheral_UpdatedNotificationStateForCharacteristic_Signature "(" \
+"L" BJBluetoothCharacteristic_ClassName ";" \
+"L" BJBluetoothException_ClassName ";" \
+")V"
+
 #define BJBluetoothPeripheral_UpdatedRSSI_MethodName "updatedRSSI"
 #define BJBluetoothPeripheral_UpdatedRSSI_Signature "(" \
 "L" BJBluetoothException_ClassName ";" \
 ")V"
+
+#define BJBluetoothPeripheral_UpdatedName_MethodName "updatedRSSI"
+#define BJBluetoothPeripheral_UpdatedName_Signature "()V"
+
+#pragma mark - BJBluetoothService
+
+#define BJBluetoothService_ClassName BJ_Namespace "BluetoothService"
 
 #define BJBluetoothService_Constructor_Signature "("\
 "J"\
 "L" BJBluetoothPeripheral_ClassName ";" \
 ")V"
 
+#pragma mark - BJBluetoothCharacteristic
+
+#define BJBluetoothCharacteristic_ClassName BJ_Namespace "BluetoothCharacteristic"
+
 #define BJBluetoothCharacteristic_Constructor_Signature "("\
 "J"\
 "L" BJBluetoothService_ClassName ";" \
 ")V"
+
+#pragma mark - BJBluetoothDescriptor
+
+#define BJBluetoothDescriptor_ClassName BJ_Namespace "BluetoothDescriptor"
 
 #define BJBluetoothDescriptor_Constructor_Signature "("\
 "J"\
@@ -141,6 +199,8 @@
 #define BJBluetoothCharacteristicProperties_NotifyEncryptionRequired_FieldSignature "Z"
 
 #pragma mark - BJBluetoothPeripheralAdvertisementData
+
+#define BJBluetoothPeripheralAdvertisementData_ClassName BJ_Namespace "BluetoothPeripheralAdvertisementData"
 
 #define BJBluetoothPeripheralAdvertisementData_Constructor_Signature "()V"
 
@@ -200,5 +260,15 @@
 
 #define BJBluetoothConnectPeripheralOptions_NotifyOnNotification_FieldName "notifyOnNotification"
 #define BJBluetoothConnectPeripheralOptions_NotifyOnNotification_FieldSignature "Z"
+
+#pragma mark - BluetoothCharacteristicWriteType
+
+#define BJBluetoothCharacteristicWriteType_ClassName BJ_Namespace "BluetoothCharacteristicWriteType"
+
+#define BJBluetoothCharacteristicWriteType_Name_MethodName "name"
+#define BJBluetoothCharacteristicWriteType_Name_MethodSignature "()L" Java_String_ClassName ";"
+
+#define BJBluetoothCharacteristicWriteType_Value_WITH_RESPONSE "WITH_RESPONSE"
+#define BJBluetoothCharacteristicWriteType_Value_WITHOUT_RESPONSE "WITHOUT_RESPONSE"
 
 #endif /* BJJavaClasses_h */

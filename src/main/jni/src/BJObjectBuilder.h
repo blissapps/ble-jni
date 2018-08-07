@@ -33,5 +33,6 @@
 + (NSDictionary*) buildPeripheralConnectionOptionsFrom:(jobject)options env:(JNIEnv*)env;
 + (NSArray*) buildCBUUIDArrayFromUUIDObjectArray:(jobjectArray)uuidArray env:(JNIEnv*)env;
 + (CBUUID*) buildCBUUIDFromUUID:(jobject)uuid env:(JNIEnv*)env;
-
++ (NSData*) buildNSDataFromByteArray:(jbyteArray)byteArray env:(JNIEnv*)env;
++ (CBCharacteristicWriteType) buildCBCharacteristicWriteTypeFromWriteType:(jobject)writeTypeJava env:(JNIEnv*)env;
 @end

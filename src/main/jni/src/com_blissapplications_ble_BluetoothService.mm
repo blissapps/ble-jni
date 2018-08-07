@@ -14,6 +14,14 @@
 
 using namespace std;
 
+JNIEXPORT jboolean JNICALL Java_com_blissapplications_ble_BluetoothService_isPrimary
+(JNIEnv *env, jobject javaService, jlong serviceHandle){
+    @autoreleasepool{
+        CBService *service = (CBService*) serviceHandle;
+        return [service isPrimary];
+    }
+}
+
 JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothService_getIdentifier
 (JNIEnv * env, jobject javaService, jlong serviceHandle) {
     @autoreleasepool{
@@ -29,5 +37,14 @@ JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothService_g
         CBService *service = (CBService*) serviceHandle;
         NSArray *characteristics = [service characteristics];
         return [BJObjectBuilder buildCharacteristicObjectArrayFrom:characteristics env:env];
+    }
+}
+
+JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothService_getIncludedServices
+(JNIEnv * env, jobject javaService, jlong serviceHandle) {
+    @autoreleasepool{
+        CBService *service = (CBService*) serviceHandle;
+        NSArray *includedServices = [service includedServices];
+        return [BJObjectBuilder buildServiceObjectArrayFrom:includedServices env:env];
     }
 }

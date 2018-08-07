@@ -29,15 +29,15 @@ public class BluetoothPeripheral {
 
     private native void discoverDescriptorsForCharacteristic(long nativePeripheralHandle, long nativeCharacteristicHandle);
 
-    private native void readValueForCharacteristic(long nativePeripheralHandle, BluetoothCharacteristic characteristic);
+    private native void readValueForCharacteristic(long nativePeripheralHandle, long nativeCharacteristicHandle);
 
-    private native void readValueForDescriptor(long nativePeripheralHandle, BluetoothDescriptor descriptor);
+    private native void readValueForDescriptor(long nativePeripheralHandle, long nativeDescriptorHandle);
 
-    private native void writeValueForCharacteristic(long nativePeripheralHandle, byte[] data, BluetoothCharacteristic characteristic, BluetoothCharacteristicWriteType type);
+    private native void writeValueForCharacteristic(long nativePeripheralHandle, byte[] data, long nativeCharacteristicHandle, BluetoothCharacteristicWriteType type);
 
-    private native void writeValueForDescriptor(long nativePeripheralHandle, byte[] data, BluetoothDescriptor descriptor);
+    private native void writeValueForDescriptor(long nativePeripheralHandle, byte[] data, long nativeDescriptorHandle);
 
-    private native void setNotifyValueForCharacteristic(long nativePeripheralHandle, BluetoothCharacteristic characteristic);
+    private native void setNotifyValueForCharacteristic(long nativePeripheralHandle, long nativeCharacteristicHandle, boolean value);
 
     private native int getState(long nativePeripheralHandle);
 
@@ -45,9 +45,9 @@ public class BluetoothPeripheral {
 
     private native double getRSSI(long nativePeripheralHandle);
 
-    private native boolean canSendWriteWithoutResponse(long nativePeripheralHandle);
+    //private native boolean canSendWriteWithoutResponse(long nativePeripheralHandle);
 
-    private native long maximumWriteValueLengthForCharacteristic(long nativePeripheralHandle, BluetoothCharacteristicWriteType characteristic);
+    //private native long maximumWriteValueLengthForCharacteristic(long nativePeripheralHandle, long nativeCharacteristicHandle);
 
     // Constructor
 
@@ -73,13 +73,6 @@ public class BluetoothPeripheral {
         discoverServices(nativePeripheralHandle, serviceUUIDs);
     }
 
-    public void discoveredServices(BluetoothException error) {
-        if (listener == null) {
-            return;
-        }
-
-        listener.discoveredServices(this, error);
-    }
 
     public void discoverIncludedServices(UUID[] serviceUUIDs, BluetoothService service) {
         discoverIncludedServices(nativePeripheralHandle, serviceUUIDs, service.getNativeServiceHandle());
@@ -93,44 +86,30 @@ public class BluetoothPeripheral {
         discoverCharacteristicsForService(nativePeripheralHandle, characteristicUUIDs, service.getNativeServiceHandle());
     }
 
-    public void discoveredCharacteristicsForService(BluetoothService service, BluetoothException error) {
-        if (listener == null) {
-            return;
-        }
-
-        listener.discoveredCharacteristicsForService(this, service, error);
-    }
 
     public void discoverDescriptorsForCharacteristic(BluetoothCharacteristic characteristic) {
         discoverDescriptorsForCharacteristic(nativePeripheralHandle, characteristic.getNativeCharacteristicHandle());
     }
 
-    public void discoveredDescriptorsForCharacteristic(BluetoothCharacteristic characteristic, BluetoothException error) {
-        if (listener == null) {
-            return;
-        }
-
-        listener.discoveredDescriptorsForCharacteristic(this, characteristic, error);
-    }
 
     public void readValueForCharacteristic(BluetoothCharacteristic characteristic) {
-        readValueForCharacteristic(nativePeripheralHandle, characteristic);
+        readValueForCharacteristic(nativePeripheralHandle, characteristic.getNativeCharacteristicHandle());
     }
 
     public void readValueForDescriptor(BluetoothDescriptor descriptor) {
-        readValueForDescriptor(nativePeripheralHandle, descriptor);
+        readValueForDescriptor(nativePeripheralHandle, descriptor.getNativeDescriptorHandle());
     }
 
     public void writeValueForCharacteristic(byte[] data, BluetoothCharacteristic characteristic, BluetoothCharacteristicWriteType type) {
-        writeValueForCharacteristic(nativePeripheralHandle, data, characteristic, type);
+        writeValueForCharacteristic(nativePeripheralHandle, data, characteristic.getNativeCharacteristicHandle(), type);
     }
 
     public void writeValueForDescriptor(byte[] data, BluetoothDescriptor descriptor) {
-        writeValueForDescriptor(nativePeripheralHandle, data, descriptor);
+        writeValueForDescriptor(nativePeripheralHandle, data, descriptor.getNativeDescriptorHandle());
     }
 
-    public void setNotifyValueForCharacteristic(BluetoothCharacteristic characteristic) {
-        setNotifyValueForCharacteristic(nativePeripheralHandle, characteristic);
+    public void setNotifyValueForCharacteristic(BluetoothCharacteristic characteristic, boolean value) {
+        setNotifyValueForCharacteristic(nativePeripheralHandle, characteristic.getNativeCharacteristicHandle(), value);
     }
 
     public BluetoothPeripheralState getState() {
@@ -145,20 +124,113 @@ public class BluetoothPeripheral {
         return getRSSI(nativePeripheralHandle);
     }
 
+
+    //10.13 Only
+    //public boolean canSendWriteWithoutResponse() {
+    //    return canSendWriteWithoutResponse(nativePeripheralHandle);
+    //}
+
+    //10.12 Only
+    //public long maximumWriteValueLengthForCharacteristic(BluetoothCharacteristic characteristic) {
+    //    return maximumWriteValueLengthForCharacteristic(nativePeripheralHandle, characteristic.getNativeCharacteristicHandle());
+    //}
+
+    //Invoked from JNI
+
+    public void updatedName() {
+        if (listener == null) {
+            return;
+        }
+
+        listener.updatedName(this);
+    }
+
+    public void discoveredServices(BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.discoveredServices(this, error);
+    }
+
+    public void discoveredIncludedServicesForService(BluetoothService service, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.discoveredIncludedServicesForService(this, service, error);
+    }
+
+    public void modifiedServices(BluetoothService[] services) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.modifiedServices(this, services);
+    }
+
+    public void discoveredCharacteristicsForService(BluetoothService service, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.discoveredCharacteristicsForService(this, service, error);
+    }
+
+    public void discoveredDescriptorsForCharacteristic(BluetoothCharacteristic characteristic, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.discoveredDescriptorsForCharacteristic(this, characteristic, error);
+    }
+
+    public void updatedValueForCharacteristic(BluetoothCharacteristic characteristic, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.updatedValueForCharacteristic(this, characteristic, error);
+    }
+
+    public void updatedValueForDescriptor(BluetoothDescriptor descriptor, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.updatedValueForDescriptor(this, descriptor, error);
+    }
+
+    public void wroteValueForCharacteristic(BluetoothCharacteristic characteristic, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.wroteValueForCharacteristic(this, characteristic, error);
+    }
+
+    public void wroteValueForDescriptor(BluetoothDescriptor descriptor, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.wroteValueForDescriptor(this, descriptor, error);
+    }
+
+    public void updatedNotificationStateForCharacteristic(BluetoothCharacteristic characteristic, BluetoothException error) {
+        if (listener == null) {
+            return;
+        }
+
+        listener.updatedNotificationStateForCharacteristic(this, characteristic, error);
+    }
+
     public void updatedRSSI(BluetoothException exception) {
         if (listener == null) {
             return;
         }
 
         listener.updatedRSSI(this, exception);
-    }
-
-    public boolean canSendWriteWithoutResponse() {
-        return canSendWriteWithoutResponse(nativePeripheralHandle);
-    }
-
-    public long maximumWriteValueLengthForCharacteristic(BluetoothCharacteristicWriteType characteristic) {
-        return maximumWriteValueLengthForCharacteristic(nativePeripheralHandle, characteristic);
     }
 
     //Getters and Setters

@@ -66,42 +66,42 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_discov
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    readValueForCharacteristic
- * Signature: (JLcom/blissapplications/ble/BluetoothCharacteristic;)V
+ * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_readValueForCharacteristic
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    readValueForDescriptor
- * Signature: (JLcom/blissapplications/ble/BluetoothDescriptor;)V
+ * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_readValueForDescriptor
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    writeValueForCharacteristic
- * Signature: (J[BLcom/blissapplications/ble/BluetoothCharacteristic;Lcom/blissapplications/ble/BluetoothCharacteristicWriteType;)V
+ * Signature: (J[BJLcom/blissapplications/ble/BluetoothCharacteristicWriteType;)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_writeValueForCharacteristic
-  (JNIEnv *, jobject, jlong, jbyteArray, jobject, jobject);
+  (JNIEnv *, jobject, jlong, jbyteArray, jlong, jobject);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    writeValueForDescriptor
- * Signature: (J[BLcom/blissapplications/ble/BluetoothDescriptor;)V
+ * Signature: (J[BJ)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_writeValueForDescriptor
-  (JNIEnv *, jobject, jlong, jbyteArray, jobject);
+  (JNIEnv *, jobject, jlong, jbyteArray, jlong);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
  * Method:    setNotifyValueForCharacteristic
- * Signature: (JLcom/blissapplications/ble/BluetoothCharacteristic;)V
+ * Signature: (JJZ)V
  */
 JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_setNotifyValueForCharacteristic
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jobject, jlong, jlong, jboolean);
 
 /*
  * Class:     com_blissapplications_ble_BluetoothPeripheral
@@ -126,22 +126,6 @@ JNIEXPORT void JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_readRS
  */
 JNIEXPORT jdouble JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getRSSI
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_blissapplications_ble_BluetoothPeripheral
- * Method:    canSendWriteWithoutResponse
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_canSendWriteWithoutResponse
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_blissapplications_ble_BluetoothPeripheral
- * Method:    maximumWriteValueLengthForCharacteristic
- * Signature: (JLcom/blissapplications/ble/BluetoothCharacteristicWriteType;)J
- */
-JNIEXPORT jlong JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_maximumWriteValueLengthForCharacteristic
-  (JNIEnv *, jobject, jlong, jobject);
 
 #ifdef __cplusplus
 }

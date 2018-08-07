@@ -27,6 +27,7 @@ public interface BluetoothPeripheralListener
 	void updatedName(BluetoothPeripheral peripheral);
 	
 	void modifiedServices(BluetoothPeripheral peripheral, BluetoothService[] services);
-	
-	void isReadyToSendWriteWithoutResponse(BluetoothPeripheral peripheral);
+
+	//to.13 Only
+	//void isReadyToSendWriteWithoutResponse(BluetoothPeripheral peripheral);
 }
