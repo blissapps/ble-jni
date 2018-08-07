@@ -26,6 +26,7 @@
 + (jobjectArray) buildDescriptorObjectArrayFrom:(NSArray*)descriptors env:(JNIEnv*)env;
 + (jobject) buildDescriptorFrom:(CBDescriptor*)descriptor env:(JNIEnv*)env;
 + (jobject) buildCharacteristicPropertiesFrom:(CBCharacteristicProperties)properties env:(JNIEnv*)env;
++ (jstring) buildStringFrom:(NSString*)string env:(JNIEnv*)env;
 
 //ObjC bbuilders
 

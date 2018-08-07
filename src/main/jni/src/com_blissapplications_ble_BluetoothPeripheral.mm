@@ -17,6 +17,15 @@ JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_get
     }
 }
 
+JNIEXPORT jstring JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getName
+(JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
+    @autoreleasepool{
+        CBPeripheral *peripheral = (CBPeripheral*) peripheralHandle;
+        NSString* name = [peripheral name];
+        return [BJObjectBuilder buildStringFrom:name env:env];
+    }
+}
+
 JNIEXPORT jint JNICALL Java_com_blissapplications_ble_BluetoothPeripheral_getState
 (JNIEnv *env, jobject peripheral, jlong peripheralHandle) {
     @autoreleasepool{

@@ -81,7 +81,7 @@ public class BluetoothCentralManagerListenerImpl implements BluetoothCentralMana
 	public void connectedPeripheral(BluetoothCentralManager centralManager, BluetoothPeripheral peripheral)
 	{
 		BluetoothPeripheralState state = peripheral.getState();
-		System.out.printf("Connected peripheral: %s - %s\n", peripheral.getIdentifier(), state);
+		System.out.printf("Connected peripheral [%s]: %s - %s\n", peripheral.getName(), peripheral.getIdentifier(), state);
 		
 		UUID c1 = UUID.fromString("0c4c3000-7700-46f4-aa96-d5e974e32a54");
 		System.out.printf("discoverServices: %s\n", c1);

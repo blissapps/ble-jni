@@ -47,7 +47,7 @@
                                              BJBluetoothPeripheralAdvertisementData_Constructor_Signature);
     jobject wrappedPeripheralAdvertisementData = env->NewObject(cls, constructor);
 
-    jstring localName = env->NewStringUTF([advertisementData[CBAdvertisementDataLocalNameKey] UTF8String]);
+    jstring localName = [self buildStringFrom:advertisementData[CBAdvertisementDataLocalNameKey] env:env];
 
     jfieldID localNameField = env->GetFieldID(cls,
                     BJBluetoothPeripheralAdvertisementData_LocalName_FieldName,
@@ -131,7 +131,7 @@
 
 + (jobject) buildBluetoothExceptionFromNSError:(NSError*)error env:(JNIEnv*)env {
     jclass cls = env->FindClass(BJBluetoothException_ClassName);
-    jstring message = env->NewStringUTF([[error localizedDescription] UTF8String]);
+    jstring message = [self buildStringFrom:[error localizedDescription] env:env];
 
     jmethodID constructor = env->GetMethodID(cls,
                                              BJ_Constructor_MethodName,
@@ -329,9 +329,6 @@
     return characteristicJava;
 }
 
-
-;
-
 + (jobjectArray) buildDescriptorObjectArrayFrom:(NSArray*)descriptors env:(JNIEnv*)env{
     jclass cls = env->FindClass(BJBluetoothDescriptor_ClassName);
     jobjectArray result = env->NewObjectArray((jsize)descriptors.count, cls, NULL);
@@ -451,6 +448,10 @@
                          notifyEncryptionRequired);
     
     return wrappedCharacteristicProperties;
+}
+
++ (jstring) buildStringFrom:(NSString*)string env:(JNIEnv*)env{
+    return env->NewStringUTF([string UTF8String]);
 }
 
 #pragma mark - ObjC Builder
