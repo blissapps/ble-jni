@@ -20,12 +20,12 @@ JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic
     }
 }
 
-JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic_getDescriptors
-(JNIEnv *env, jobject characteristicJava, jlong characteristicHandle){
+JNIEXPORT jbyteArray JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic_getValue
+(JNIEnv *env, jobject characteristicJava, jlong characteristicHandle) {
     @autoreleasepool{
         CBCharacteristic* characteristic = (CBCharacteristic*) characteristicHandle;
-        NSArray *descriptors = [characteristic descriptors];
-        return [BJObjectBuilder buildDescriptorObjectArrayFrom:descriptors env:env];
+        NSData* value = [characteristic value];
+        return [BJObjectBuilder buildByteArrayFromNSData:value env:env];
     }
 }
 
@@ -35,5 +35,23 @@ JNIEXPORT jobject JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic
         CBCharacteristic* characteristic = (CBCharacteristic*) characteristicHandle;
         CBCharacteristicProperties properties = [characteristic properties];
         return [BJObjectBuilder buildCharacteristicPropertiesFrom:properties env:env];
+    }
+}
+
+JNIEXPORT jobjectArray JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic_getDescriptors
+(JNIEnv *env, jobject characteristicJava, jlong characteristicHandle){
+    @autoreleasepool{
+        CBCharacteristic* characteristic = (CBCharacteristic*) characteristicHandle;
+        NSArray *descriptors = [characteristic descriptors];
+        return [BJObjectBuilder buildDescriptorObjectArrayFrom:descriptors env:env];
+    }
+}
+
+JNIEXPORT jboolean JNICALL Java_com_blissapplications_ble_BluetoothCharacteristic_isNotifying
+(JNIEnv *env, jobject characteristicJava, jlong characteristicHandle){
+    @autoreleasepool{
+        CBCharacteristic* characteristic = (CBCharacteristic*) characteristicHandle;
+        BOOL isNotifying = [characteristic isNotifying];
+        return isNotifying;
     }
 }
